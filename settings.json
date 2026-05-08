@@ -1,0 +1,75 @@
+{
+  "groomName": "Karim Khoury",
+  "groomNameAr": "كريم خوري",
+  "groomFamily": "Khoury",
+  "brideName": "Lara Sassine",
+  "brideNameAr": "ليلى سيسين",
+  "brideFamily": "Sassine",
+  "weddingDate": "2026-10-18",
+  "ceremonyTime": "16:00",
+  "receptionTime": "19:00",
+  "bibleQuote": "\"Two are better than one…\" — Ecclesiastes 4:9",
+  "bibleQuoteAr": "\"وَالاِثْنَانِ خَيْرٌ مِنَ الْوَاحِدِ\" — الجامعة ٤:٩",
+  "churchName": "Saint Joseph Church",
+  "churchNameAr": "كنيسة مار يوسف",
+  "churchAddr": "Gemmayzeh, Beirut, Lebanon",
+  "churchMap": "https://maps.app.goo.gl/...",
+  "churchPhoto": "photos/church.jpg",
+  "venueName": "Château Rêve Ballroom",
+  "venueNameAr": "قاعة شاتو ريف",
+  "venueAddr": "Jounieh, Mount Lebanon",
+  "venueMap": "https://maps.app.goo.gl/...",
+  "venuePhoto": "photos/venue.jpg",
+  "envPhoto": "photos/opening.jpg",
+  "couplePhoto": "photos/hero1.jpg",
+  "couplePhoto2": "photos/hero2.jpg",
+  "couplePhoto3": "photos/hero3.jpg",
+  "couplePhotoMid": "photos/mid1.jpg",
+  "couplePhotoMid2": "",
+  "couplePhotoMid3": "",
+  "couplePhotoClose": "photos/close1.jpg",
+  "couplePhotoClose2": "",
+  "couplePhotoClose3": "",
+  "galleryPhotos": [
+    "photos/story1.jpg",
+    "photos/story2.jpg",
+    "photos/story3.jpg"
+  ],
+  "rsvpPhoto": "photos/rsvp-bg.jpg",
+  "bgMusic": "photos/music.mp3",
+  "wishAccount": "03 757 194",
+  "rsvpEmail": "wasimbaba.1996@gmail.com",
+  "rsvpWebhook": "",
+  "rsvpDeadline": "September 1, 2026",
+  "photoInterval": 5,
+  "ghRepo": "Wassim-invites/karim-lara",
+  "template": "luxury",
+  "portalUser": "karim-lara",
+  "portalPass": "KL2026",
+  "_baseUrl": "https://Wassim-invites.github.io/karim-lara/",
+  "guests": {
+    "Rony-Abboudy": {
+      "en": "Rony Abboudy's Family",
+      "ar": "عائلة روني عبودي",
+      "members": [
+        "Rony",
+        "Cindi",
+        "Ranil",
+        "Brooke"
+      ]
+    },
+    "Marie-Khoury": {
+      "en": "Marie Khoury",
+      "ar": "مارين خوري",
+      "members": [
+        "Marie",
+        "Georges"
+      ]
+    },
+    "Georges-Sassine": {
+      "en": "Georges Sassine",
+      "ar": "جورج سيسين",
+      "members": []
+    }
+  }
+}
