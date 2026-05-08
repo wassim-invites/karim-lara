@@ -47,29 +47,5 @@
   "portalUser": "karim-lara",
   "portalPass": "KL2026",
   "_baseUrl": "https://Wassim-invites.github.io/karim-lara/",
-  "guests": {
-    "Rony-Abboudy": {
-      "en": "Rony Abboudy's Family",
-      "ar": "عائلة روني عبودي",
-      "members": [
-        "Rony",
-        "Cindi",
-        "Ranil",
-        "Brooke"
-      ]
-    },
-    "Marie-Khoury": {
-      "en": "Marie Khoury",
-      "ar": "مارين خوري",
-      "members": [
-        "Marie",
-        "Georges"
-      ]
-    },
-    "Georges-Sassine": {
-      "en": "Georges Sassine",
-      "ar": "جورج سيسين",
-      "members": []
-    }
-  }
+  "guests": {}
 }
