@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Karim &amp; Lara — Your Wedding Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f5f2;--bg2:#ffffff;--bg3:#f2efe9;--bg4:#ede9e1;
+  --gold:#a07c3a;--gold2:#8a6b2e;--gold3:#6b5122;
+  --text:#1a1510;--text2:#4a3f30;--text3:#8a7a65;
+  --border:rgba(160,124,58,.18);--border2:rgba(160,124,58,.32);
+  --green:#1a7a42;--red:#c0392b;
+}
+html,body{min-height:100vh;background:var(--bg);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:14px}
+
+/* LOGIN */
+#loginScreen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:2rem;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#fdf8f2 0%,#f5ede0 100%);
+}
+.login-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 100%,rgba(160,124,58,.12),transparent 70%)}
+.login-box{
+  position:relative;z-index:1;width:100%;max-width:360px;
+  background:#fff;border:1px solid var(--border2);border-radius:16px;
+  padding:2.5rem 2rem;text-align:center;
+  box-shadow:0 8px 40px rgba(0,0,0,.08);
+}
+.login-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.5rem;color:var(--text);margin-bottom:.3rem}
+.login-logo span{color:var(--gold)}
+.login-sub{font-size:.65rem;letter-spacing:.2em;color:var(--text3);margin-bottom:2rem}
+.login-couple{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.8rem;color:var(--text);margin-bottom:.4rem}
+.login-date{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.35em;color:var(--gold);margin-bottom:2rem;opacity:.9}
+.login-field{margin-bottom:.9rem;text-align:left}
+.login-field label{display:block;font-size:.68rem;font-weight:600;color:var(--text2);margin-bottom:.35rem;letter-spacing:.04em}
+.login-field input{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:.85rem;
+  padding:.62rem .9rem;outline:none;transition:border-color .2s,box-shadow .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.login-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(160,124,58,.1)}
+.login-btn{
+  width:100%;margin-top:.5rem;padding:.85rem;
+  background:var(--gold);border:none;border-radius:8px;
+  color:#fff;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;
+  cursor:pointer;transition:background .2s;
+}
+.login-btn:hover{background:var(--gold2)}
+.login-err{font-size:.72rem;color:var(--red);margin-top:.6rem;display:none}
+.login-divider{display:flex;align-items:center;gap:.8rem;margin:1.5rem 0}
+.login-line{flex:1;height:.5px;background:var(--gold);opacity:.25}
+.login-diamond{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:.5;flex-shrink:0}
+
+/* PORTAL */
+#portal{display:none;min-height:100vh}
+
+/* HEADER */
+.portal-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:.85rem 1.4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 1px 8px rgba(0,0,0,.06);
+}
+.ph-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.1rem;color:var(--text)}
+.ph-brand span{color:var(--gold)}
+.ph-right{display:flex;align-items:center;gap:.8rem}
+.ph-couple{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.28em;color:var(--gold);opacity:.9}
+.logout-btn{
+  background:transparent;border:1px solid var(--border2);border-radius:6px;
+  color:var(--text3);font-size:.68rem;padding:.3rem .75rem;cursor:pointer;
+  transition:all .2s;
+}
+.logout-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO BAND */
+.portal-hero{
+  position:relative;padding:4rem 1.5rem 3.5rem;text-align:center;overflow:hidden;
+}
+.ph-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.18;background-image:url('https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&q=80')}
+.ph-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(247,245,242,.5),rgba(247,245,242,.88))}
+.ph-inner{position:relative;z-index:1}
+.ph-eyebrow{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.45em;color:var(--gold);opacity:.9;margin-bottom:.9rem}
+.ph-names{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(2.5rem,10vw,4.5rem);color:var(--text);line-height:1}
+.ph-names .amp{font-size:.55em;color:var(--gold);font-style:normal;display:block;margin:.3em 0}
+.ph-date{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.35em;color:var(--text3);margin-top:1.2rem}
+
+/* CONTENT */
+.portal-body{max-width:520px;margin:0 auto;padding:2rem 1.2rem 4rem}
+
+/* COUNTDOWN */
+.cd-block{
+  background:#fff;border:1px solid var(--border2);border-radius:14px;
+  padding:1.8rem 1rem;margin-bottom:1.2rem;text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.cd-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.45em;color:var(--gold);opacity:.85;margin-bottom:1.5rem}
+.cd-row{display:flex;justify-content:center;gap:0}
+.cd-item{display:flex;flex-direction:column;align-items:center;padding:0 .9rem;position:relative}
+.cd-item:not(:last-child)::after{content:':';position:absolute;right:-.3rem;top:.4rem;font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);opacity:.4}
+.cd-n{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,9vw,3.8rem);font-weight:300;color:var(--text);line-height:1;min-width:2ch;text-align:center}
+.cd-u{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.35em;color:var(--gold);opacity:.7;margin-top:.35rem}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.2rem}
+.stat-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:1.3rem 1rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04);
+}
+.stat-card.hl{border-color:var(--border2);background:linear-gradient(135deg,#fff,rgba(160,124,58,.04))}
+.sc-n{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1;margin-bottom:.3rem;color:var(--text)}
+.sc-l{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.3em;color:var(--text3)}
+.sc-sub{font-size:.68rem;color:var(--text3);margin-top:.2rem}
+
+/* PROGRESS */
+.prog-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.prog-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.7rem}
+.prog-label{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.2em;color:var(--gold);opacity:.9}
+.prog-pct{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text)}
+.prog-bar{height:4px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(to right,var(--gold3),var(--gold));border-radius:99px;transition:width 1.2s ease}
+
+/* GUEST LIST */
+.guest-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.gc-head{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.2em;color:var(--gold);opacity:.9;margin-bottom:1rem}
+.guest-row{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.guest-row:last-child{border-bottom:none}
+.g-avatar{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  background:var(--bg4);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem;color:var(--gold);
+}
+.g-info{flex:1;min-width:0}
+.g-name{font-size:.82rem;font-weight:500;color:var(--text);margin-bottom:.15rem}
+.g-sub{font-size:.68rem;color:var(--text3)}
+.g-badge{flex-shrink:0}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:99px;font-size:.58rem;font-weight:600}
+.b-yes{background:rgba(26,122,66,.1);color:var(--green)}
+.b-no{background:rgba(192,57,43,.1);color:var(--red)}
+.b-pend{background:rgba(160,124,58,.1);color:var(--gold2)}
+
+/* FOOTER */
+.portal-footer{
+  text-align:center;padding:2rem 1rem;
+  font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.35em;color:var(--text3);
+  border-top:1px solid var(--border);opacity:.7;
+}
+
+/* DIVIDER */
+.gdiv{display:flex;align-items:center;gap:.8rem;margin:1.5rem 0}
+.gl{flex:1;height:.5px;background:var(--gold);opacity:.25}
+.gd{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:.45;flex-shrink:0}
+
+/* READ-ONLY BANNER */
+.ro-banner{
+  display:flex;align-items:center;gap:.6rem;
+  background:rgba(160,124,58,.06);border:1px solid rgba(160,124,58,.2);
+  border-radius:8px;padding:.7rem 1rem;margin-bottom:1.2rem;
+  font-size:.72rem;color:var(--text3);
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="loginScreen">
+  <div class="login-bg"></div>
+  <div class="login-box">
+    <div class="login-logo">Wasim <span>✦</span> Invites</div>
+    <div class="login-sub">CLIENT PORTAL</div>
+
+    <div class="login-divider"><div class="login-line"></div><div class="login-diamond"></div><div class="login-line"></div></div>
+
+    <div class="login-couple">Karim &amp; Lara</div>
+    <div class="login-date">OCTOBER 18 · 2026</div>
+
+    <div class="login-field"><label>Username</label><input type="text" id="loginUser" placeholder="your-username" autocomplete="username"></div>
+    <div class="login-field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="login-err" id="loginErr">Incorrect username or password.</div>
+    <button class="login-btn" onclick="doLogin()">ENTER PORTAL</button>
+
+    <div style="margin-top:1.5rem;font-size:.65rem;color:var(--text3);opacity:.6">
+      Provided by your wedding planner
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PORTAL ═══ -->
+<div id="portal">
+
+  <!-- Header -->
+  <header class="portal-header">
+    <div class="ph-brand">Wasim <span>✦</span> Invites</div>
+    <div class="ph-right">
+      <span class="ph-couple">KARIM &amp; LARA</span>
+      <button class="logout-btn" onclick="doLogout()">Log out</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="portal-hero">
+    <div class="ph-bg"></div>
+    <div class="ph-overlay"></div>
+    <div class="ph-inner">
+      <p class="ph-eyebrow">YOUR WEDDING PORTAL</p>
+      <div class="ph-names">
+        Karim
+        <span class="amp">&amp;</span>
+        Lara
+      </div>
+      <p class="ph-date">SATURDAY · OCTOBER 18 · 2026</p>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="portal-body">
+
+    <!-- Read-only notice -->
+    <div class="ro-banner">
+      <span>◈</span>
+      <span>This is a read-only view. Contact Wasim to make any changes.</span>
+    </div>
+
+    <!-- Countdown -->
+    <div class="cd-block">
+      <p class="cd-label">YOUR BIG DAY IS IN</p>
+      <div class="cd-row">
+        <div class="cd-item"><span class="cd-n" id="cdD">000</span><span class="cd-u">Days</span></div>
+        <div class="cd-item"><span class="cd-n" id="cdH">00</span><span class="cd-u">Hours</span></div>
+        <div class="cd-item"><span class="cd-n" id="cdM">00</span><span class="cd-u">Min</span></div>
+        <div class="cd-item"><span class="cd-n" id="cdS">00</span><span class="cd-u">Sec</span></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card hl">
+        <div class="sc-n" style="color:var(--gold)">3</div>
+        <div class="sc-l">Invitations Sent</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-n" style="color:var(--green)">5</div>
+        <div class="sc-l">Guests Attending</div>
+        <div class="sc-sub">confirmed</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-n" style="color:var(--text2)">2</div>
+        <div class="sc-l">Families Confirmed</div>
+      </div>
+      <div class="stat-card">
+        <div class="sc-n" style="color:var(--text3)">1</div>
+        <div class="sc-l">Awaiting Reply</div>
+      </div>
+    </div>
+
+    <!-- Response rate -->
+    <div class="prog-card">
+      <div class="prog-head">
+        <span class="prog-label">RESPONSE RATE</span>
+        <span class="prog-pct">67%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div style="font-size:.7rem;color:var(--text3);margin-top:.6rem">2 of 3 invitations have responded</div>
+    </div>
+
+    <div class="gdiv"><div class="gl"></div><div class="gd"></div><div class="gl"></div></div>
+
+    <!-- Guest responses -->
+    <div class="guest-card">
+      <div class="gc-head">RSVP RESPONSES</div>
+
+      <div class="guest-row">
+        <div class="g-avatar">R</div>
+        <div class="g-info">
+          <div class="g-name">Rony Abboudy's Family</div>
+          <div class="g-sub">Attending: Rony, Cindi, Ranil (3 guests)</div>
+        </div>
+        <div class="g-badge"><span class="badge b-yes">✓ YES</span></div>
+      </div>
+
+      <div class="guest-row">
+        <div class="g-avatar">M</div>
+        <div class="g-info">
+          <div class="g-name">Marie Khoury</div>
+          <div class="g-sub">Attending: Marie, Georges (2 guests)</div>
+        </div>
+        <div class="g-badge"><span class="badge b-yes">✓ YES</span></div>
+      </div>
+
+      <div class="guest-row">
+        <div class="g-avatar">G</div>
+        <div class="g-info">
+          <div class="g-name">Georges Sassine</div>
+          <div class="g-sub">No response yet</div>
+        </div>
+        <div class="g-badge"><span class="badge b-pend">Pending</span></div>
+      </div>
+    </div>
+
+    <!-- Contact card -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.4rem;text-align:center;margin-bottom:1.2rem">
+      <div style="font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.25em;color:var(--gold);opacity:.8;margin-bottom:.6rem">NEED CHANGES?</div>
+      <div style="font-size:.82rem;color:var(--text2);margin-bottom:.3rem">Contact Wasim Al Baba</div>
+      <a href="https://wa.me/96103757194" style="color:var(--gold);font-size:.78rem;text-decoration:none" target="_blank">📲 WhatsApp Wasim</a>
+    </div>
+
+  </div>
+
+  <div class="portal-footer">
+    WEDDING PORTAL BY WASIM AL BABA &nbsp;·&nbsp; READ-ONLY ACCESS
+  </div>
+</div>
+
+<script>
+// ── CREDENTIALS (in production, these come from settings.json) ──
+const CREDS = { user: 'karim-lara', pass: 'KL2026' };
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const err = document.getElementById('loginErr');
+  if (u === CREDS.user && p === CREDS.pass) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('portal').style.display = 'block';
+    startCountdown();
+    // animate progress bar after reveal
+    setTimeout(() => {
+      document.getElementById('progFill').style.width = '67%';
+    }, 400);
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+}
+
+document.getElementById('loginPass')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginUser')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('loginPass').focus();
+});
+
+function doLogout() {
+  document.getElementById('portal').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+}
+
+function startCountdown() {
+  function tick() {
+    const diff = new Date('2026-10-18T16:00:00') - new Date();
+    if (diff <= 0) return;
+    const d = Math.floor(diff / 864e5);
+    const h = Math.floor((diff % 864e5) / 36e5);
+    const m = Math.floor((diff % 36e5) / 6e4);
+    const s = Math.floor((diff % 6e4) / 1e3);
+    document.getElementById('cdD').textContent = String(d).padStart(3, '0');
+    document.getElementById('cdH').textContent = String(h).padStart(2, '0');
+    document.getElementById('cdM').textContent = String(m).padStart(2, '0');
+    document.getElementById('cdS').textContent = String(s).padStart(2, '0');
+  }
+  tick(); setInterval(tick, 1000);
+}
+</script>
+</body>
+</html>
