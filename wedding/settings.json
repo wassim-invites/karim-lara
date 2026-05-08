@@ -34,6 +34,15 @@
   "couplePhotoMid2": "Karim & Lara/photo5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {},
+  "guests": {
+    "Wassim-Al-Baba": {
+      "en": "Wassim Al Baba",
+      "ar": "الصديق الصدوق وسيم البابا المحترم",
+      "members": [
+        "Wassim Al Baba",
+        "Fadi Al Baba"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
