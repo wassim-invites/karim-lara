@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+<title>زفاف كريم و لارا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root { --white: #fff; --green: #4caf50; --overlay: rgba(0,0,0,0.38); }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden; background: #111;
+  font-family: 'Amiri', serif;
+  touch-action: none; user-select: none;
+}
+
+/* ═══ SLIDER ════════════════════════════════ */
+#slider {
+  display: flex;
+  width: 100%; height: 100dvh;
+  transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+
+/* ═══ SLIDE BASE ════════════════════════════ */
+.slide {
+  flex: 0 0 100vw; width: 100vw; height: 100dvh;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.slide-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  background-color: #2a2a2a;
+  transition: background-image 0.5s ease;
+}
+.slide-overlay {
+  position: absolute; inset: 0;
+  background: var(--overlay);
+}
+.slide-content {
+  position: relative; z-index: 2; width: 100%;
+  padding: 2rem 1.5rem;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  color: var(--white);
+  max-height: 100dvh; overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ═══ SWIPE HINT ════════════════════════════ */
+#swipe-hint {
+  position: fixed; bottom: 3.4rem; left: 0; right: 0;
+  z-index: 200; text-align: center; pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#swipe-hint p {
+  font-family: 'Amiri', serif; font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+#swipe-hint.hidden { opacity: 0; }
+
+/* ═══ DOTS ══════════════════════════════════ */
+#dots {
+  position: fixed; bottom: 1.3rem; left: 0; right: 0;
+  z-index: 200; display: flex; justify-content: center; gap: 7px;
+  pointer-events: none;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transition: all 0.3s;
+}
+.dot.active { background: var(--white); transform: scale(1.3); }
+
+/* ═══ MUSIC BTN ═════════════════════════════ */
+#music-btn {
+  position: fixed; bottom: 1rem; left: 1rem; z-index: 200;
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.7); font-size: 1.4rem; padding: 0.4rem;
+}
+
+/* ═══ SLIDE 1 — ENTRY ═══════════════════════ */
+.entry-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  border: 2.5px solid var(--white);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(2px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; margin-bottom: 0.75rem;
+  transition: background 0.2s;
+}
+.entry-circle:active { background: rgba(255,255,255,0.25); }
+.entry-circle-text {
+  font-family: 'Amiri', serif; font-size: 1.6rem; font-weight: 700; color: var(--white);
+}
+.entry-tap-label {
+  font-family: 'Amiri', serif; font-size: 1.1rem; color: rgba(255,255,255,0.75);
+}
+
+/* ═══ SLIDE 2 — QUOTE ═══════════════════════ */
+.quote-main {
+  font-family: 'Amiri', serif; font-weight: 700;
+  font-size: clamp(1.6rem, 7vw, 2.4rem); color: var(--white);
+  line-height: 1.75; margin-bottom: 0.75rem;
+}
+.quote-sub {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(0.95rem, 3.5vw, 1.3rem); color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+}
+
+/* ═══ SLIDE 3 — FORMAL ══════════════════════ */
+.formal-families {
+  font-family: 'Amiri', serif; font-size: clamp(1rem, 4vw, 1.3rem);
+  color: rgba(255,255,255,0.9); line-height: 1.85; margin-bottom: 0.5rem;
+}
+.formal-honour {
+  font-family: 'Amiri', serif; font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+  color: rgba(255,255,255,0.8); line-height: 1.85; margin-bottom: 0.75rem;
+}
+.formal-couple {
+  font-family: 'Amiri', serif; font-weight: 700;
+  font-size: clamp(2.6rem, 12vw, 4.8rem); color: var(--white);
+  line-height: 1; margin: 0.5rem 0 0.75rem;
+}
+.formal-date {
+  font-family: 'Amiri', serif; font-size: clamp(0.95rem, 4vw, 1.3rem);
+  color: rgba(255,255,255,0.9); line-height: 1.85;
+}
+
+/* ═══ SLIDES 4 & 5 — VENUES ════════════════ */
+.venue-title {
+  font-family: 'Amiri', serif; font-weight: 700;
+  font-size: clamp(2rem, 9vw, 3.2rem); color: var(--white);
+  margin-bottom: 1.5rem;
+}
+.venue-icon-circle {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--white); display: flex; align-items: center;
+  justify-content: center; font-size: 1.5rem; margin-bottom: 0.6rem;
+}
+.venue-detail {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1rem, 4vw, 1.25rem); color: var(--white);
+  line-height: 1.85;
+}
+.map-btn {
+  display: inline-block; margin-top: 1.5rem;
+  padding: 0.85rem 2.5rem;
+  border: 2px solid var(--white); border-radius: 4px;
+  background: transparent; color: var(--white);
+  font-family: 'Amiri', serif; font-size: 1.1rem;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s;
+}
+.map-btn:active { background: rgba(255,255,255,0.15); }
+
+/* ═══ SLIDE 6 — GIFT ════════════════════════ */
+.gift-title {
+  font-family: 'Amiri', serif; font-weight: 700;
+  font-size: clamp(2rem, 9vw, 3.2rem); color: var(--white);
+  margin-bottom: 1rem;
+}
+.gift-body {
+  font-family: 'Amiri', serif; font-size: clamp(1rem, 4vw, 1.3rem);
+  color: rgba(255,255,255,0.9); line-height: 1.85; margin-bottom: 1.5rem;
+}
+.whish-w {
+  font-size: 3rem; color: #ff3366; line-height: 1;
+  text-shadow: 0 0 25px rgba(255,51,102,0.5); margin-bottom: 0.5rem;
+}
+.whish-info {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem); color: var(--white);
+  line-height: 1.8;
+}
+
+/* ═══ SLIDE 7 — RSVP ════════════════════════ */
+.rsvp-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 360px; margin-bottom: 0.85rem; gap: 1rem;
+}
+.rsvp-name {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: clamp(1.1rem, 4.5vw, 1.4rem); color: var(--white);
+  flex: 1; text-align: right;
+}
+.rsvp-toggle {
+  padding: 0.55rem 1.5rem; border: none; border-radius: 4px;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.05rem; cursor: pointer; min-width: 65px;
+  transition: background 0.2s;
+}
+.rsvp-toggle.yes { background: var(--green); color: var(--white); }
+.rsvp-toggle.no  { background: rgba(255,255,255,0.22); color: var(--white); }
+.rsvp-total {
+  font-family: 'Amiri', serif; font-size: 1rem;
+  color: rgba(255,255,255,0.85); margin: 0.6rem 0 1rem;
+  display: flex; align-items: center; gap: 0.4rem; justify-content: center;
+}
+.rsvp-question {
+  font-family: 'Amiri', serif; font-size: clamp(1.2rem, 5vw, 1.6rem);
+  color: var(--white); line-height: 1.8; margin-bottom: 1.25rem;
+}
+.rsvp-pair { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.rsvp-big {
+  padding: 0.85rem 2rem; border: none; border-radius: 4px;
+  font-family: 'Amiri', serif; font-size: 1.15rem; cursor: pointer;
+  min-width: 130px; transition: opacity 0.2s;
+}
+.rsvp-big.yes { background: var(--green); color: var(--white); }
+.rsvp-big.no  { background: rgba(255,255,255,0.22); color: var(--white); border: 1px solid rgba(255,255,255,0.4); }
+.rsvp-submit {
+  margin-top: 1rem; padding: 0.85rem 2.5rem;
+  background: var(--green); color: var(--white);
+  border: none; border-radius: 4px;
+  font-family: 'Amiri', serif; font-size: 1.15rem; cursor: pointer;
+}
+.rsvp-submit:active { opacity: 0.8; }
+.rsvp-note {
+  font-family: 'Amiri', serif; font-size: 0.88rem;
+  color: rgba(255,255,255,0.6); margin-top: 1rem; line-height: 1.7;
+}
+.rsvp-confirm {
+  font-family: 'Amiri', serif; font-size: clamp(1.2rem, 5vw, 1.6rem);
+  color: var(--white); line-height: 1.8;
+}
+
+/* ═══ SLIDE 8 — CLOSING ═════════════════════ */
+.photo-card {
+  background: var(--white); border-radius: 6px;
+  overflow: hidden; width: min(80vw, 310px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+  transform: rotate(-3deg);
+}
+.photo-card-img {
+  width: 100%; aspect-ratio: 4/3;
+  background-size: cover; background-position: center;
+  background-color: #555;
+}
+.photo-card-caption {
+  padding: 0.75rem 1rem;
+  font-family: 'Amiri', serif; font-size: 1rem;
+  color: #333; text-align: center; line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<audio id="bg-audio" loop preload="none"></audio>
+
+<!-- ═══════ SLIDES ═══════════════════════════ -->
+<div id="slider">
+
+  <!-- 1. ENTRY -->
+  <div class="slide" id="s0">
+    <div class="slide-bg" id="bg0"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="entry-circle" id="entry-circle">
+        <span class="entry-circle-text">إبدأ</span>
+      </div>
+      <p class="entry-tap-label">إضغط للبدء</p>
+    </div>
+  </div>
+
+  <!-- 2. BIBLE QUOTE -->
+  <div class="slide" id="s1">
+    <div class="slide-bg" id="bg1"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <p class="quote-main" id="quote-ar-text">إِذًا لَيْسَا بَعْدُ اثْنَيْنِ<br>. بَلْ جَسَدٌ وَاحِدٌ</p>
+      <p class="quote-sub" id="quote-en-text" style="display:none"></p>
+    </div>
+  </div>
+
+  <!-- 3. FORMAL INVITE -->
+  <div class="slide" id="s2">
+    <div class="slide-bg" id="bg2"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <p class="formal-families" id="txt-families">يسر عائلة خوري و عائلة ساسين</p>
+      <p class="formal-honour">أن تشهدوا معهم على "نعم" أبدية يتبادلها ولديهما</p>
+      <p class="formal-couple" id="txt-couple">كريم و لارا</p>
+      <p class="formal-date" id="txt-date">نهار السبت الواقع في<br>٢٦ أيلول ٢٠٢٦</p>
+    </div>
+  </div>
+
+  <!-- 4. CEREMONY -->
+  <div class="slide" id="s3">
+    <div class="slide-bg" id="bg3"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <p class="venue-title">الإكليل</p>
+      <div class="venue-icon-circle">🕐</div>
+      <p class="venue-detail" id="txt-ctime">السبت، ٢٦ أيلول ٢٠٢٦<br>٤:٠٠ مساءً</p>
+      <div class="venue-icon-circle" style="margin-top:1rem">📍</div>
+      <p class="venue-detail" id="txt-church">كنيسة مار أنطونيوس<br>الكحالة</p>
+      <a class="map-btn" id="church-map" href="#" target="_blank">خريطة الموقع</a>
+    </div>
+  </div>
+
+  <!-- 5. RECEPTION -->
+  <div class="slide" id="s4">
+    <div class="slide-bg" id="bg4"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <p class="venue-title">حفل العشاء</p>
+      <div class="venue-icon-circle">🕐</div>
+      <p class="venue-detail" id="txt-rtime">السبت، ٢٦ أيلول ٢٠٢٦<br>٧:٠٠ مساءً</p>
+      <div class="venue-icon-circle" style="margin-top:1rem">📍</div>
+      <p class="venue-detail" id="txt-venue">قاعة لا سال</p>
+      <a class="map-btn" id="venue-map" href="#" target="_blank">خريطة الموقع</a>
+    </div>
+  </div>
+
+  <!-- 6. GIFT -->
+  <div class="slide" id="s5">
+    <div class="slide-bg" id="bg5"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <p class="gift-title">لائحة الهدايا</p>
+      <p class="gift-body">حضوركم هو أكبر هدية لنا.<br>لمن يرغب، لائحة الهدايا في</p>
+      <div id="whish-block" style="display:none">
+        <div class="whish-w">𝒲</div>
+        <p class="whish-info" id="txt-whish"></p>
+      </div>
+      <p id="gift-alt" class="gift-body" style="font-size:1.3rem">حضوركم هو الهدية الأجمل 🌿</p>
+    </div>
+  </div>
+
+  <!-- 7. RSVP -->
+  <div class="slide" id="s6">
+    <div class="slide-bg" id="bg6"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content" id="rsvp-wrap">
+      <!-- built by JS -->
+    </div>
+  </div>
+
+  <!-- 8. CLOSING -->
+  <div class="slide" id="s7">
+    <div class="slide-bg" id="bg7"></div>
+    <div class="slide-overlay" style="background:rgba(0,0,0,0.5)"></div>
+    <div class="slide-content">
+      <div class="photo-card">
+        <div class="photo-card-img" id="closing-photo"></div>
+        <div class="photo-card-caption" id="closing-caption">فَالَّذِي جَمَعَهُ اللهُ لاَ يُفَرِّقُهُ إِنْسَانٌ</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #slider -->
+
+<!-- SWIPE HINT -->
+<div id="swipe-hint"><p>حزك إلى اليسار &nbsp; ←</p></div>
+
+<!-- DOTS -->
+<div id="dots"></div>
+
+<!-- MUSIC -->
+<button id="music-btn" onclick="toggleMusic()" aria-label="music">♪</button>
+
+<script>
+// ═══════════════════════════════════════════
+//   KARIM & LARA — SWIPE INVITATION
+// ═══════════════════════════════════════════
+
+const REPO        = 'wassim-invites/karim-lara';
+const SETTINGS_URL = `https://raw.githubusercontent.com/${REPO}/main/settings.json`;
+const BASE_URL    = `https://wassim-invites.github.io/karim-lara/`;
+const N_SLIDES    = 8;
+
+let CFG = {}, GID = '', GEN = '', GEN_AR = '', FAM = [];
+let cur = 0, musicOn = false;
+let tx0 = 0, ty0 = 0, dragging = false;
+
+// ─── NAVIGATION ─────────────────────────────
+const slider = document.getElementById('slider');
+
+function goTo(n) {
+  if (n < 0 || n >= N_SLIDES) return;
+  cur = n;
+  slider.style.transform = `translateX(${-n * 100}vw)`;
+  updateDots();
+  if (n > 0) document.getElementById('swipe-hint').classList.add('hidden');
+  if (n === N_SLIDES - 1) document.getElementById('swipe-hint').style.visibility = 'hidden';
+}
+
+function goNext() {
+  if (cur === 0) startMusic();
+  goTo(cur + 1);
+}
+
+// touch
+slider.addEventListener('touchstart', e => {
+  tx0 = e.touches[0].clientX; ty0 = e.touches[0].clientY; dragging = true;
+}, {passive: true});
+slider.addEventListener('touchend', e => {
+  if (!dragging) return;
+  const dx = e.changedTouches[0].clientX - tx0;
+  const dy = e.changedTouches[0].clientY - ty0;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+    dx < 0 ? goTo(cur + 1) : goTo(cur - 1);
+  }
+  dragging = false;
+}, {passive: true});
+
+// mouse (desktop)
+slider.addEventListener('mousedown', e => { tx0 = e.clientX; dragging = true; e.preventDefault(); });
+window.addEventListener('mouseup', e => {
+  if (!dragging) return;
+  const dx = e.clientX - tx0;
+  if (Math.abs(dx) > 40) dx < 0 ? goTo(cur + 1) : goTo(cur - 1);
+  dragging = false;
+});
+
+// entry slide click
+document.getElementById('s0').addEventListener('click', () => { if (cur === 0) goNext(); });
+document.getElementById('entry-circle').addEventListener('click', e => { e.stopPropagation(); goNext(); });
+
+// ─── DOTS ────────────────────────────────────
+function buildDots() {
+  const w = document.getElementById('dots');
+  w.innerHTML = '';
+  for (let i = 0; i < N_SLIDES; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    w.appendChild(d);
+  }
+  updateDots();
+}
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+}
+
+// ─── MUSIC ───────────────────────────────────
+function startMusic() {
+  document.getElementById('bg-audio').play().catch(() => {});
+  musicOn = true;
+  document.getElementById('music-btn').textContent = '♫';
+}
+function toggleMusic() {
+  const a = document.getElementById('bg-audio');
+  if (musicOn) { a.pause(); document.getElementById('music-btn').textContent = '♪'; }
+  else { a.play().catch(() => {}); document.getElementById('music-btn').textContent = '♫'; }
+  musicOn = !musicOn;
+}
+document.addEventListener('visibilitychange', () => {
+  const a = document.getElementById('bg-audio');
+  if (document.hidden && musicOn) a.pause();
+  else if (!document.hidden && musicOn) a.play().catch(() => {});
+});
+
+// ─── SETTINGS ────────────────────────────────
+async function loadSettings() {
+  try {
+    const r = await fetch(SETTINGS_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    CFG = await r.json();
+  } catch (e) { console.warn('Settings load failed', e); }
+  applySettings();
+  if (GID) applyGuest();
+}
+
+function applySettings() {
+  const S = CFG;
+
+  // Photos
+  setBg('bg0', S.envPhoto || S.couplePhoto);
+  setBg('bg1', S.couplePhoto);
+  setBg('bg2', S.couplePhoto2 || S.couplePhoto);
+  setBg('bg3', S.couplePhotoMid || S.couplePhoto);
+  setBg('bg4', S.couplePhotoMid2 || S.couplePhotoMid || S.couplePhoto);
+  setBg('bg5', S.couplePhotoMid3 || S.couplePhotoClose || S.couplePhoto);
+  setBg('bg6', S.rsvpPhoto || S.couplePhotoClose || S.couplePhoto);
+  setBg('bg7', S.couplePhotoClose2 || S.couplePhotoClose || S.couplePhoto);
+
+  // Closing card inner photo
+  const cp = resolvePhoto(S.couplePhotoClose || S.couplePhoto);
+  if (cp) document.getElementById('closing-photo').style.backgroundImage = `url('${cp}')`;
+
+  // Music
+  if (S.bgMusic) {
+    const a = document.getElementById('bg-audio');
+    a.src = resolvePhoto(S.bgMusic); a.load();
+  }
+
+  // Dates
+  const wDate = S.weddingDate || '2026-09-26';
+  const d = new Date(wDate + 'T12:00:00');
+  const M_AR  = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+  const D_AR  = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const day   = D_AR[d.getDay()];
+  const num   = arNum(d.getDate());
+  const mon   = M_AR[d.getMonth()];
+  const yr    = arNum(d.getFullYear());
+  const ct    = arTime(S.ceremonyTime  || '16:00');
+  const rt    = arTime(S.receptionTime || '19:00');
+
+  set('txt-date',  `نهار ${day} الواقع في\n${num} ${mon} ${yr}`);
+  set('txt-ctime', `${day}، ${num} ${mon} ${yr}\n${ct}`);
+  set('txt-rtime', `${day}، ${num} ${mon} ${yr}\n${rt}`);
+
+  // Names / families
+  const groom = (S.groomNameAr  || 'كريم').split(' ')[0];
+  const bride  = (S.brideNameAr  || 'لارا').split(' ')[0];
+  const gf     = S.groomFamily || 'خوري';
+  const bf     = S.brideFamily || 'ساسين';
+  set('txt-couple',  `${groom} و ${bride}`);
+  set('txt-families', `يسر عائلة ${gf} و عائلة ${bf}`);
+
+  // Bible quote
+  if (S.bibleQuoteAr) {
+    document.getElementById('quote-ar-text').innerHTML = S.bibleQuoteAr.replace(/\n/g,'<br>');
+  }
+  if (S.bibleQuote) {
+    const qe = document.getElementById('quote-en-text');
+    qe.textContent = S.bibleQuote; qe.style.display = '';
+  }
+
+  // Church
+  const cn = S.churchNameAr || S.churchName || 'كنيسة';
+  const ca = S.churchAddress || '';
+  set('txt-church', cn + (ca ? '\n' + ca : ''));
+  if (S.churchMap) document.getElementById('church-map').href = S.churchMap;
+
+  // Venue
+  const vn = S.venueNameAr || S.venueName || 'القاعة';
+  const va = S.venueAddress || '';
+  set('txt-venue', vn + (va ? '\n' + va : ''));
+  if (S.venueMap) document.getElementById('venue-map').href = S.venueMap;
+
+  // Gift
+  const acc = S.wishAccount || S.whishAccount;
+  if (acc) {
+    document.getElementById('whish-block').style.display = '';
+    set('txt-whish', `Whish Money\nAcct ID: ${acc}`);
+    document.getElementById('gift-alt').style.display = 'none';
+  }
+}
+
+function applyGuest() {
+  const g = (CFG.guests || {})[GID];
+  if (g) {
+    GEN = g.en || GID.replace(/-/g, ' ');
+    GEN_AR = g.ar || '';
+    FAM = g.members || [];
+  } else {
+    GEN = GID.replace(/-/g, ' ');
+    FAM = [];
+  }
+  buildRsvp();
+}
+
+// ─── RSVP ────────────────────────────────────
+function buildRsvp() {
+  const wrap = document.getElementById('rsvp-wrap');
+  wrap.innerHTML = '';
+
+  const saved = GID ? JSON.parse(localStorage.getItem('rsvp_' + GID) || 'null') : null;
+  if (saved) { renderConfirm(wrap, saved); return; }
+
+  if (FAM.length > 0) {
+    // Member toggles
+    FAM.forEach(name => {
+      const row = document.createElement('div');
+      row.className = 'rsvp-row';
+      const btn = document.createElement('button');
+      btn.className = 'rsvp-toggle yes';
+      btn.textContent = 'Yes';
+      btn.dataset.state = 'yes';
+      btn.addEventListener('click', () => {
+        if (btn.dataset.state === 'yes') { btn.dataset.state = 'no'; btn.className = 'rsvp-toggle no'; btn.textContent = 'No'; }
+        else { btn.dataset.state = 'yes'; btn.className = 'rsvp-toggle yes'; btn.textContent = 'Yes'; }
+        updateCount();
+      });
+      const nm = document.createElement('span');
+      nm.className = 'rsvp-name'; nm.textContent = name;
+      row.appendChild(nm); row.appendChild(btn);
+      wrap.appendChild(row);
+    });
+
+    const tot = document.createElement('div');
+    tot.className = 'rsvp-total';
+    tot.innerHTML = `إجمالي الضيوف الحاضرين: <strong id="rsvp-count">${FAM.length}</strong>`;
+    wrap.appendChild(tot);
+
+    const sub = document.createElement('button');
+    sub.className = 'rsvp-submit'; sub.textContent = 'إرسال';
+    sub.addEventListener('click', () => {
+      const attending = [...document.querySelectorAll('.rsvp-toggle.yes')].map(b => {
+        return b.closest('.rsvp-row').querySelector('.rsvp-name').textContent;
+      });
+      const data = makeData(attending.length > 0 ? 'yes' : 'no', attending);
+      saveRsvp(data);
+      wrap.innerHTML = '';
+      renderConfirm(wrap, data);
+    });
+    wrap.appendChild(sub);
+
+  } else if (GID) {
+    // Yes/No buttons
+    const q = document.createElement('p'); q.className = 'rsvp-question'; q.textContent = 'هل ستحضر في يوم الفرح؟';
+    wrap.appendChild(q);
+    const pair = document.createElement('div'); pair.className = 'rsvp-pair';
+    const yBtn = document.createElement('button'); yBtn.className = 'rsvp-big yes'; yBtn.textContent = 'نعم، بكل سرور';
+    const nBtn = document.createElement('button'); nBtn.className = 'rsvp-big no';  nBtn.textContent = 'للأسف لن أتمكن';
+    yBtn.onclick = () => { const d = makeData('yes', [GEN]); saveRsvp(d); wrap.innerHTML = ''; renderConfirm(wrap, d); };
+    nBtn.onclick = () => { const d = makeData('no',  []);    saveRsvp(d); wrap.innerHTML = ''; renderConfirm(wrap, d); };
+    pair.appendChild(yBtn); pair.appendChild(nBtn);
+    wrap.appendChild(pair);
+
+  } else {
+    const p = document.createElement('p');
+    p.className = 'rsvp-question';
+    p.textContent = 'يرجى استخدام الرابط الخاص بك للتأكيد';
+    wrap.appendChild(p);
+  }
+
+  // contact note
+  addNote(wrap);
+}
+
+function updateCount() {
+  const c = document.querySelectorAll('.rsvp-toggle.yes').length;
+  const el = document.getElementById('rsvp-count');
+  if (el) el.textContent = c;
+}
+
+function makeData(response, attending) {
+  return {
+    guestId: GID, guestName: GEN, guestNameAr: GEN_AR,
+    response, attending,
+    date: new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'})
+  };
+}
+
+function saveRsvp(data) {
+  if (GID) localStorage.setItem('rsvp_' + GID, JSON.stringify(data));
+  try { new BroadcastChannel('wedding_rsvp').postMessage(data); } catch(e) {}
+  if (CFG.rsvpWebhook) fetch(CFG.rsvpWebhook, {method:'POST', body: JSON.stringify(data)}).catch(() => {});
+}
+
+function renderConfirm(wrap, data) {
+  if (data.response === 'yes' && data.attending && data.attending.length > 0) {
+    data.attending.forEach(name => {
+      const row = document.createElement('div');
+      row.className = 'rsvp-row';
+      row.innerHTML = `<span class="rsvp-name">${name}</span><button class="rsvp-toggle yes" style="cursor:default">Yes</button>`;
+      wrap.appendChild(row);
+    });
+    const tot = document.createElement('div');
+    tot.className = 'rsvp-total';
+    tot.innerHTML = `إجمالي الضيوف الحاضرين: <strong>${data.attending.length}</strong>`;
+    wrap.appendChild(tot);
+  } else {
+    const msg = document.createElement('p');
+    msg.className = 'rsvp-confirm';
+    msg.textContent = data.response === 'yes'
+      ? 'شكراً! نتطلع بشغف لرؤيتكم 🌿'
+      : 'للأسف ستُفتقدون. شكراً لإعلامنا.';
+    wrap.appendChild(msg);
+  }
+  addNote(wrap);
+}
+
+function addNote(wrap) {
+  const phone = CFG.rsvpPhone || '';
+  if (!phone) return;
+  const n = document.createElement('p');
+  n.className = 'rsvp-note';
+  n.textContent = `في حال احتجت إلى تحديث ردك، يرجى الاتصال ${phone}`;
+  wrap.appendChild(n);
+}
+
+// ─── UTILS ───────────────────────────────────
+function setBg(id, src) {
+  if (!src) return;
+  const el = document.getElementById(id);
+  if (el) el.style.backgroundImage = `url('${resolvePhoto(src)}')`;
+}
+
+function resolvePhoto(p) {
+  if (!p) return '';
+  if (p.startsWith('http')) return p;
+  return (CFG._baseUrl || BASE_URL) + p;
+}
+
+function set(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = text.replace(/\n/g, '<br>');
+}
+
+const AR_NUMS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function arNum(n) { return String(n).split('').map(c => AR_NUMS[+c] ?? c).join(''); }
+function arTime(t) {
+  const [h, m] = t.split(':').map(Number);
+  const s = h < 12 ? 'صباحاً' : 'مساءً';
+  return `${arNum(h % 12 || 12)}:${arNum(m).padStart ? arNum(String(m).padStart(2,'0')) : arNum(m)} ${s}`;
+}
+
+// ─── BOOT ────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(location.search);
+  GID = p.get('id') || '';
+  buildDots();
+  goTo(0);
+  loadSettings();
+});
+</script>
+</body>
+</html>
