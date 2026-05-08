@@ -3,7 +3,7 @@
   "groomNameAr": "كريم خوري",
   "groomFamily": "Khoury",
   "brideName": "Lara Sassine",
-  "brideNameAr": "لارا سيسين",
+  "brideNameAr": "لارا ساسين",
   "brideFamily": "Sassine",
   "weddingDate": "2026-10-18",
   "ceremonyTime": "16:00",
@@ -47,5 +47,14 @@
   "portalUser": "karim-lara",
   "portalPass": "KL2026",
   "_baseUrl": "https://Wassim-invites.github.io/karim-lara/",
-  "guests": {}
+  "guests": {
+    "Wassim-Al-Baba": {
+      "en": "Wassim Al Baba",
+      "ar": "عائلة وسيم البابا",
+      "members": [
+        "Wassim Al Baba",
+        "Fadi Al Baba"
+      ]
+    }
+  }
 }
