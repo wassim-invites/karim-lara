@@ -37,15 +37,10 @@
   "galleryIdbKeys": [],
   "guests": {
     "Rony-Abboudy": {
-      "en": "Rony Abboudy'",
-      "ar": "عائلة روني عبودي",
-      "members": []
-    },
-    "Rony-Abboudys-Family": {
-      "en": "Rony Abboudy's Family",
+      "en": "Rony Abboudy",
       "ar": "عائلة روني عبودي",
       "members": [
-        "Roni",
+        "Rony",
         "Cindi"
       ]
     }
