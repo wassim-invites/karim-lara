@@ -27,7 +27,7 @@
   "formspreeId": "mdabaapd",
   "rsvpPhone": "70568896",
   "rsvpEmail": "wassimbaba.1996@gmail.com",
-  "rsvpWebhook": "https://script.google.com/macros/s/AKfycbzdmr8zpOwU1e-NwjZPKAWsuIU-yldKuz0owAzHcZ5BFfs5dRW8BaOlP_u8MtcQ_Wdw/exec",
+  "rsvpWebhook": "https://script.google.com/macros/s/AKfycbwCryx2lvTz9KslO6FHyvI8KagIi3mbqSyxVecdgnhKXQ6VnadAKy9J4TSgYnzxiifI/exec",
   "ghRepo": "wassim-invites/karim-lara",
   "couplePhoto": "Karim & Lara/photo1.jpg",
   "couplePhoto2": "Karim & Lara/photo2.jpg",
@@ -39,14 +39,6 @@
   "guests": {
     "Test-1": {
       "en": "Test 1",
-      "ar": "Test",
-      "members": [
-        "Rony",
-        "Cindi"
-      ]
-    },
-    "Test": {
-      "en": "Test",
       "ar": "Test",
       "members": [
         "Rony",
