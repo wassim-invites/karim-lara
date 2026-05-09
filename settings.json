@@ -37,20 +37,12 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
-    "Test-3": {
-      "en": "Test 3",
+    "Test-4": {
+      "en": "Test 4",
       "ar": "Test",
       "members": [
         "Wassim",
         "Rony"
-      ]
-    },
-    "Test-2": {
-      "en": "Test 2",
-      "ar": "Test",
-      "members": [
-        "Rony",
-        "Cindi"
       ]
     }
   },
