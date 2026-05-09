@@ -36,9 +36,9 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
-    "Rony-Abboudy": {
-      "en": "Rony Abboudy",
-      "ar": "عائلة روني عبودي",
+    "Test": {
+      "en": "Test",
+      "ar": "Test",
       "members": [
         "Rony",
         "Cindi"
