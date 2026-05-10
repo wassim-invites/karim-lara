@@ -37,6 +37,14 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Wassim-Test": {
+      "en": "Wassim Test",
+      "ar": "الصديق الصدوق وسيم البابا المحترم",
+      "members": [
+        "Wassim",
+        "Rony"
+      ]
+    },
     "Wassim-Al-Baba": {
       "en": "Wassim Al Baba",
       "ar": "الصديق الصدوق وسيم البابا المحترم",
