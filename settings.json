@@ -37,6 +37,14 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Wassim-Fam-Test-1": {
+      "en": "Wassim - Fam Test 1",
+      "ar": "عائلة وسيم",
+      "members": [
+        "Wassim Al Baba",
+        "Reine Abboudy"
+      ]
+    },
     "Wassim-Fam": {
       "en": "Wassim - Fam",
       "ar": "عائلة وسيم",
