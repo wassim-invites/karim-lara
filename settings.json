@@ -37,15 +37,17 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
-    "Test-9": {
-      "en": "Test 9",
-      "ar": "Test",
+    "Wassim-Al-Baba": {
+      "en": "Wassim Al Baba",
+      "ar": "الصديق الصدوق وسيم البابا المحترم",
       "members": [
-        "Wassim"
+        "Wassim Al Baba",
+        "Toufic Bejjani",
+        "Reine Abboudy"
       ]
     },
-    "Test-8": {
-      "en": "Test 8",
+    "Test-9": {
+      "en": "Test 9",
       "ar": "Test",
       "members": [
         "Wassim"
