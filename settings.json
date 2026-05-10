@@ -36,6 +36,16 @@
   "couplePhotoMid2": "Karim & Lara/photo5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {},
+  "guests": {
+    "Wassim-Al-Baba-Test-3": {
+      "en": "Wassim Al Baba - Test 3",
+      "ar": "Test",
+      "members": [
+        "Wassim",
+        "Rony",
+        "Brooke"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
