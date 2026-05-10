@@ -36,15 +36,6 @@
   "couplePhotoMid2": "Karim & Lara/photo5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {
-    "Wassim-Test66": {
-      "en": "Wassim Test66",
-      "ar": "Test",
-      "members": [
-        "Wassim",
-        "Reine"
-      ]
-    }
-  },
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
