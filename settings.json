@@ -37,6 +37,13 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Wassim-Al-Baba-Test-23": {
+      "en": "Wassim Al Baba - Test 23",
+      "ar": "Test",
+      "members": [
+        "Wassim"
+      ]
+    },
     "Wassim-Al-Baba-Test-3": {
       "en": "Wassim Al Baba - Test 3",
       "ar": "Test",
