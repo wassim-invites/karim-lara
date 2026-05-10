@@ -1,31 +1,31 @@
 {
-  "groomName": "Karim Khoury",
-  "groomNameAr": "كريم خوري",
-  "groomFamily": "Khoury",
-  "groomFamilyAr": "خوري",
-  "brideName": "Lara Sassine",
-  "brideNameAr": "لارا ساسين",
-  "brideFamily": "Sassine",
-  "brideFamilyAr": "ساسين",
-  "weddingDate": "2027-02-11",
+  "groomName": "Toufic Joud Bejjani",
+  "groomNameAr": "توفيق جود بجاني",
+  "groomFamily": "Bejjani",
+  "groomFamilyAr": "بجاني",
+  "brideName": "Reine Nabil Abboudy",
+  "brideNameAr": "ريان نبيل عبودي",
+  "brideFamily": "Abboudy",
+  "brideFamilyAr": "عبودي",
+  "weddingDate": "2026-09-26",
   "ceremonyTime": "16:00",
   "receptionTime": "19:00",
   "invLang": "both",
   "churchName": "Our Lady of the Rosary Church",
   "churchNameAr": "كنيسة سيدة الوردية",
   "churchAddress": "Baabda, Mount Lebanon",
-  "churchMap": "https://maps.app.goo.gl/uWBQoGyPxRUTm1ps5",
+  "churchMap": "",
   "venueName": "Grand Ballroom",
   "venueNameAr": "قاعة الأعراس الكبرى",
   "venueAddress": "Beirut, Lebanon",
-  "venueMap": "https://maps.app.goo.gl/iJbzwEn4FRAzzH4Y8",
-  "photoInterval": "3",
+  "venueMap": "",
+  "photoInterval": "4",
   "bibleQuote": "\"Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up.\" — Ecclesiastes 4:9-10",
   "bibleQuoteAr": "\"وَالاِثْنَانِ خَيْرٌ مِنَ الْوَاحِدِ، لأَنَّ لَهُمَا أُجْرَةً حَسَنَةً فِي تَعَبِهِمَا\" — الجامعة ٤:٩",
   "bgMusic": "Karim & Lara/music.mp3",
   "wishAccount": "@KarimLaraWedding",
   "formspreeId": "mdabaapd",
-  "rsvpPhone": "70568896",
+  "rsvpPhone": "76985968",
   "rsvpEmail": "wassimbaba.1996@gmail.com",
   "rsvpWebhook": "https://script.google.com/macros/s/AKfycbwCryx2lvTz9KslO6FHyvI8KagIi3mbqSyxVecdgnhKXQ6VnadAKy9J4TSgYnzxiifI/exec",
   "ghRepo": "wassim-invites/karim-lara",
@@ -36,31 +36,6 @@
   "couplePhotoMid2": "Karim & Lara/photo5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {
-    "Wassim-Test": {
-      "en": "Wassim Test",
-      "ar": "الصديق الصدوق وسيم البابا المحترم",
-      "members": [
-        "Wassim",
-        "Rony"
-      ]
-    },
-    "Wassim-Al-Baba": {
-      "en": "Wassim Al Baba",
-      "ar": "الصديق الصدوق وسيم البابا المحترم",
-      "members": [
-        "Wassim Al Baba",
-        "Toufic Bejjani",
-        "Reine Abboudy"
-      ]
-    },
-    "Test-9": {
-      "en": "Test 9",
-      "ar": "Test",
-      "members": [
-        "Wassim"
-      ]
-    }
-  },
-  "_baseUrl": "https://cdn.jsdelivr.net/gh/wassim-invites/karim-lara@main/"
+  "guests": {},
+  "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
