@@ -37,6 +37,15 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "Wassim-Test-2": {
+      "en": "Wassim Test 2",
+      "ar": "Test",
+      "members": [
+        "Wassim",
+        "Toufic",
+        "Reine"
+      ]
+    },
     "Wassim-Test-1": {
       "en": "Wassim Test 1",
       "ar": "الصديق الصدوق وسيم البابا المحترم",
