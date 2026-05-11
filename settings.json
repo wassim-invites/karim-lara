@@ -37,6 +37,14 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
+    "WissoTesting2": {
+      "en": "Wisso-Testing2",
+      "ar": "عائلة وسيم",
+      "members": [
+        "Wassim",
+        "Reine"
+      ]
+    },
     "WissoTesting1": {
       "en": "Wisso-Testing1",
       "ar": "عائلة وسيم",
