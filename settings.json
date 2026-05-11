@@ -37,14 +37,6 @@
   "galleryPhotos": [],
   "galleryIdbKeys": [],
   "guests": {
-    "Wiss-Fam": {
-      "en": "Wiss - Fam",
-      "ar": "عائلة وسيم",
-      "members": [
-        "Wassim",
-        "Reine"
-      ]
-    },
     "Wassim-Fam-Test-1": {
       "en": "Wassim - Fam Test 1",
       "ar": "عائلة وسيم",
