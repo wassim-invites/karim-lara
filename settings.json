@@ -29,22 +29,13 @@
   "rsvpEmail": "wassimbaba.1996@gmail.com",
   "rsvpWebhook": "https://script.google.com/macros/s/AKfycbyV-6KWEgHflqj1pix1qJIWVL-9MD4M85C5fbXexwbOLc9jrME_fn2LwptMPGDkqKUa/exec",
   "ghRepo": "wassim-invites/karim-lara",
-  "couplePhoto": "Karim & Lara/photo1.jpg",
-  "couplePhoto2": "Karim & Lara/photo2.jpg",
-  "couplePhoto3": "Karim & Lara/photo3.jpg",
-  "couplePhotoMid": "Karim & Lara/photo4.jpg",
-  "couplePhotoMid2": "Karim & Lara/photo5.jpg",
+  "couplePhoto": "Karim & Lara/1.jpg",
+  "couplePhoto2": "Karim & Lara/2.jpg",
+  "couplePhoto3": "Karim & Lara/3.jpg",
+  "couplePhotoMid": "Karim & Lara/4.jpg",
+  "couplePhotoMid2": "Karim & Lara/5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {
-    "Wassim-Fam-Test-1": {
-      "en": "Wassim - Fam Test 1",
-      "ar": "عائلة وسيم",
-      "members": [
-        "Wassim Al Baba",
-        "Reine Abboudy"
-      ]
-    }
-  },
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
