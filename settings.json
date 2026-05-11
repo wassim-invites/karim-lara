@@ -36,6 +36,15 @@
   "couplePhotoMid2": "Karim & Lara/5.jpg",
   "galleryPhotos": [],
   "galleryIdbKeys": [],
-  "guests": {},
+  "guests": {
+    "Wisso": {
+      "en": "Wisso",
+      "ar": "عائلة وسيم",
+      "members": [
+        "Wassim",
+        "Reine"
+      ]
+    }
+  },
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/"
 }
