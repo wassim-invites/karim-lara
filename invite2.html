@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+<title id="page-title">Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#0d1a10;-webkit-tap-highlight-color:transparent}
+#bg-stage{position:fixed;inset:0;z-index:0;background:#0d1a10}
+.bg-layer{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 0.9s ease;transform:translateZ(0)}
+.bg-layer.active{opacity:1}
+#bg-overlay{position:fixed;inset:0;z-index:1;background:rgba(0,0,0,0.42)}
+#slider{position:fixed;inset:0;z-index:2;display:flex;height:100%;transition:transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94);will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.slide{flex-shrink:0;width:100vw;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;text-align:center;color:#fff;transform:translateZ(0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.t-ar{font-family:'Amiri',serif;direction:rtl;unicode-bidi:embed}
+.t-en{font-family:'Cormorant Garamond',serif}
+.t-ar-bold{font-family:'Amiri',serif;font-weight:700;direction:rtl;unicode-bidi:embed}
+/* SLIDE 1 — ENTRY */
+.entry-circle{width:105px;height:105px;border-radius:50%;border:2.5px solid #fff;background:rgba(255,255,255,0.08);backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin-bottom:1rem;transition:background 0.18s;gap:2px;animation:breathe 2.4s ease-in-out infinite}
+.entry-circle:active{background:rgba(255,255,255,0.22)}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.15)}50%{box-shadow:0 0 0 14px rgba(255,255,255,0)}}
+.entry-start-ar{font-size:1.5rem;line-height:1}
+.entry-start-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;opacity:0.8}
+.entry-sub-ar{font-size:1rem;opacity:0.75}
+.entry-sub-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;opacity:0.65;margin-top:0.15rem}
+/* SLIDE 2 — QUOTE */
+.quote-ar{font-family:'Amiri',serif;font-weight:700;font-size:clamp(1.55rem,6.5vw,2.3rem);line-height:1.75;margin-bottom:1rem;direction:rtl}
+.quote-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.95rem,3.5vw,1.25rem);line-height:1.7;opacity:0.82}
+/* SLIDE 3 — FORMAL */
+.formal-families-ar{font-family:'Amiri',serif;font-size:clamp(1rem,4vw,1.3rem);line-height:1.9;opacity:0.92;margin-bottom:0.3rem;direction:rtl}
+.formal-families-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.82rem,3vw,1.05rem);opacity:0.75;margin-bottom:0.75rem}
+.formal-honour-ar{font-family:'Amiri',serif;font-size:clamp(0.85rem,3.5vw,1.1rem);opacity:0.8;line-height:1.85;margin-bottom:0.5rem;direction:rtl}
+.formal-honour-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.78rem,3vw,0.98rem);opacity:0.7;margin-bottom:1rem}
+.formal-couple-ar{font-family:'Amiri',serif;font-weight:700;font-size:clamp(2.6rem,13vw,5rem);line-height:1;margin:0.25rem 0 0.4rem;direction:rtl}
+.formal-couple-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,7vw,2.8rem);opacity:0.9;margin-bottom:0.75rem}
+.formal-date-ar{font-family:'Amiri',serif;font-size:clamp(0.95rem,4vw,1.25rem);line-height:1.9;opacity:0.9;direction:rtl}
+.formal-date-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.8rem,3vw,1rem);opacity:0.72;margin-top:0.2rem}
+/* SLIDES 4 & 5 — VENUES */
+.venue-title-ar{font-family:'Amiri',serif;font-weight:700;font-size:clamp(2rem,9vw,3.2rem);margin-bottom:1.2rem;direction:rtl}
+.venue-title-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,4vw,1.4rem);opacity:0.75;margin-bottom:1.5rem}
+.icon-circle{width:52px;height:52px;border-radius:50%;background:#fff;color:#222;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 0.5rem}
+.venue-detail-ar{font-family:'Amiri',serif;font-size:clamp(1rem,4vw,1.25rem);line-height:1.85;direction:rtl}
+.venue-detail-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.82rem,3vw,1rem);opacity:0.75;margin-top:0.2rem}
+.map-btn{display:inline-block;margin-top:1.4rem;padding:0.82rem 2.4rem;border:2px solid #fff;border-radius:4px;background:transparent;color:#fff;font-family:'Amiri',serif;font-size:1.05rem;text-decoration:none;cursor:pointer;transition:background 0.18s}
+.map-btn:active{background:rgba(255,255,255,0.15)}
+.map-btn-sub{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.78rem;opacity:0.75;margin-top:0.15rem}
+/* SLIDE 6 — GIFT */
+.gift-title-ar{font-family:'Amiri',serif;font-weight:700;font-size:clamp(2rem,9vw,3.2rem);margin-bottom:0.75rem;direction:rtl}
+.gift-title-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,4vw,1.4rem);opacity:0.75;margin-bottom:1.2rem}
+.gift-body-ar{font-family:'Amiri',serif;font-size:clamp(1rem,4vw,1.25rem);line-height:1.9;opacity:0.9;margin-bottom:1.2rem;direction:rtl}
+.gift-body-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.82rem,3vw,1rem);opacity:0.72;margin-bottom:1.4rem}
+.whish-logo{font-size:2.8rem;color:#ff3060;line-height:1;text-shadow:0 0 20px rgba(255,48,96,0.5);margin-bottom:0.5rem}
+.whish-info{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,4.5vw,1.4rem);line-height:1.8}
+/* SLIDE 7 — RSVP */
+.rsvp-check-row{display:flex;align-items:center;gap:0.9rem;width:100%;max-width:360px;margin-bottom:0.7rem;cursor:pointer;padding:0.55rem 0.9rem;background:rgba(255,255,255,0.1);border-radius:6px;transition:background 0.18s}
+.rsvp-check-row:active{background:rgba(255,255,255,0.2)}
+.rsvp-cb{width:22px;height:22px;flex-shrink:0;accent-color:#4caf50;cursor:pointer}
+.rsvp-row{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:360px;margin-bottom:0.8rem;gap:1rem}
+.rsvp-member-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,4.5vw,1.4rem);flex:1;text-align:left}
+.rsvp-toggle{padding:0.5rem 1.4rem;border:none;border-radius:4px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;cursor:pointer;min-width:62px}
+.rsvp-toggle.yes{background:#4caf50;color:#fff}
+.rsvp-toggle.no{background:rgba(255,255,255,0.2);color:#fff}
+.rsvp-total{font-family:'Amiri',serif;direction:rtl;font-size:1rem;opacity:0.85;margin:0.5rem 0 0.9rem;text-align:center}
+.rsvp-total-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.9rem;opacity:0.7;display:block;margin-top:0.1rem}
+.rsvp-question-ar{font-family:'Amiri',serif;direction:rtl;font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.8;margin-bottom:0.4rem}
+.rsvp-question-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.9rem,3.5vw,1.15rem);opacity:0.75;margin-bottom:1.2rem}
+.rsvp-pair{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+.rsvp-big{padding:0.82rem 1.8rem;border:1px solid rgba(255,255,255,0.4);border-radius:4px;background:rgba(255,255,255,0.15);color:#fff;font-family:'Amiri',serif;font-size:1.1rem;cursor:pointer;min-width:130px}
+.rsvp-big.selected-yes{background:#4caf50;border-color:#4caf50}
+.rsvp-big.selected-no{background:rgba(255,255,255,0.3)}
+.rsvp-submit{margin-top:0.9rem;padding:0.82rem 2.4rem;background:#4caf50;color:#fff;border:none;border-radius:4px;font-family:'Amiri',serif;font-size:1.1rem;cursor:pointer}
+.rsvp-submit:active{opacity:0.8}
+.rsvp-note-ar{font-family:'Amiri',serif;direction:rtl;font-size:clamp(1rem,4vw,1.25rem);opacity:0.92;margin-top:1.5rem;line-height:1.8}
+.rsvp-note-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.88rem,3.5vw,1.05rem);opacity:0.75;display:block;margin-top:0.2rem}
+.rsvp-confirm-ar{font-family:'Amiri',serif;direction:rtl;font-size:clamp(1.2rem,5vw,1.6rem);line-height:1.8}
+.rsvp-confirm-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.9rem,3.5vw,1.15rem);opacity:0.75;margin-top:0.3rem}
+/* SLIDE 8 — CLOSING */
+.photo-card{background:#fff;border-radius:6px;overflow:hidden;width:min(78vw,305px);box-shadow:0 12px 45px rgba(0,0,0,0.6);transform:rotate(-3deg)}
+.photo-card-img{width:100%;aspect-ratio:4/3;background-size:cover;background-position:center;background-color:#444}
+.photo-card-caption{padding:0.75rem 1rem;text-align:center;font-family:'Amiri',serif;font-size:1rem;color:#333;line-height:1.65;direction:rtl}
+.photo-card-caption-en{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.82rem;color:#777;display:block;margin-top:0.15rem}
+/* CHROME */
+#swipe-hint{position:fixed;bottom:3.5rem;left:0;right:0;z-index:10;text-align:center;pointer-events:none;transition:opacity 0.5s}
+#swipe-hint p{display:inline-block;color:rgba(255,255,255,0.65);font-family:'Amiri',serif;font-size:0.95rem}
+#swipe-hint.hidden{opacity:0}
+#dots{position:fixed;bottom:1.3rem;left:0;right:0;z-index:10;display:flex;justify-content:center;gap:7px;pointer-events:none}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.32);transition:all 0.3s}
+.dot.active{background:#fff;transform:scale(1.3)}
+#music-btn{position:fixed;bottom:0.9rem;left:1rem;z-index:10;background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.65);font-size:1.4rem;padding:0.4rem}
+/* LANGUAGE HIDE */
+body.lang-ar .t-en,body.lang-ar .entry-start-en,body.lang-ar .entry-sub-en,body.lang-ar .quote-en,body.lang-ar .formal-families-en,body.lang-ar .formal-honour-en,body.lang-ar .formal-couple-en,body.lang-ar .formal-date-en,body.lang-ar .venue-title-en,body.lang-ar .venue-detail-en,body.lang-ar .map-btn-sub,body.lang-ar .gift-title-en,body.lang-ar .gift-body-en,body.lang-ar .rsvp-question-en,body.lang-ar .rsvp-total-en,body.lang-ar .rsvp-confirm-en,body.lang-ar .rsvp-note-en,body.lang-ar .photo-card-caption-en{display:none!important}
+body.lang-en .t-ar,body.lang-en .t-ar-bold,body.lang-en .entry-start-ar,body.lang-en .entry-sub-ar,body.lang-en .quote-ar,body.lang-en .formal-families-ar,body.lang-en .formal-honour-ar,body.lang-en .formal-couple-ar,body.lang-en .formal-date-ar,body.lang-en .venue-title-ar,body.lang-en .venue-detail-ar,body.lang-en .gift-title-ar,body.lang-en .gift-body-ar,body.lang-en .rsvp-question-ar,body.lang-en .rsvp-confirm-ar,body.lang-en .rsvp-note-ar,body.lang-en .rsvp-total{display:none!important}
+</style>
+</head>
+<body>
+<audio id="bg-audio" loop preload="none"></audio>
+<div id="bg-stage"></div>
+<div id="bg-overlay"></div>
+<div id="slider">
+
+  <!-- SLIDE 1: ENTRY -->
+  <div class="slide" id="s0">
+    <div class="entry-circle" id="entry-btn">
+      <span class="t-ar-bold entry-start-ar">إبدأ</span>
+      <span class="t-en entry-start-en">Begin</span>
+    </div>
+    <p class="t-ar entry-sub-ar">إضغط للبدء</p>
+    <p class="t-en entry-sub-en">Tap to open your invitation</p>
+  </div>
+
+  <!-- SLIDE 2: QUOTE -->
+  <div class="slide" id="s1">
+    <p class="quote-ar" id="q-ar">إِذًا لَيْسَا بَعْدُ اثْنَيْنِ<br>بَلْ جَسَدٌ وَاحِدٌ .</p>
+    <p class="quote-en" id="q-en">"The two are no longer two, but one flesh."</p>
+  </div>
+
+  <!-- SLIDE 3: FORMAL -->
+  <div class="slide" id="s2">
+    <p class="formal-families-ar" id="f-fam-ar">يسر عائلة الخوري وعائلة الساسين</p>
+    <p class="formal-families-en" id="f-fam-en">Khoury Family & Sassine Family</p>
+    <p class="formal-honour-ar">أن تشهدوا معهم على "نعم" أبدية يتبادلها ولديهما</p>
+    <p class="formal-honour-en">joyfully request the honour of your presence at the marriage of</p>
+    <p class="formal-couple-ar" id="f-couple-ar">كريم و لارا</p>
+    <p class="formal-couple-en" id="f-couple-en">Karim &amp; Lara</p>
+    <p class="formal-date-ar" id="f-date-ar">نهار السبت الواقع في<br>٢٦ أيلول ٢٠٢٦</p>
+    <p class="formal-date-en" id="f-date-en">Saturday, September 26, 2026</p>
+  </div>
+
+  <!-- SLIDE 4: CEREMONY -->
+  <div class="slide" id="s3">
+    <p class="venue-title-ar">الإكليل</p>
+    <p class="venue-title-en">The Ceremony</p>
+    <div class="icon-circle">🕐</div>
+    <p class="venue-detail-ar" id="v-ctime-ar">السبت، ٢٦ أيلول ٢٠٢٦<br>٤:٠٠ مساءً</p>
+    <p class="venue-detail-en" id="v-ctime-en">Saturday, September 26, 2026 · 4:00 PM</p>
+    <div class="icon-circle" style="margin-top:1rem">📍</div>
+    <p class="venue-detail-ar" id="v-church-ar">كنيسة مار أنطونيوس<br>الكحالة</p>
+    <p class="venue-detail-en" id="v-church-en">Saint Antoine Church · Kahhale</p>
+    <a class="map-btn" id="church-map-btn" href="#" target="_blank">خريطة الموقع<span class="map-btn-sub">Open in Maps</span></a>
+  </div>
+
+  <!-- SLIDE 5: RECEPTION -->
+  <div class="slide" id="s4">
+    <p class="venue-title-ar">حفل العشاء</p>
+    <p class="venue-title-en">The Reception</p>
+    <div class="icon-circle">🕐</div>
+    <p class="venue-detail-ar" id="v-rtime-ar">السبت، ٢٦ أيلول ٢٠٢٦<br>٧:٠٠ مساءً</p>
+    <p class="venue-detail-en" id="v-rtime-en">Saturday, September 26, 2026 · 7:00 PM</p>
+    <div class="icon-circle" style="margin-top:1rem">📍</div>
+    <p class="venue-detail-ar" id="v-venue-ar">قاعة لا سال</p>
+    <p class="venue-detail-en" id="v-venue-en">La Salle Venue</p>
+    <a class="map-btn" id="venue-map-btn" href="#" target="_blank">خريطة الموقع<span class="map-btn-sub">Open in Maps</span></a>
+  </div>
+
+  <!-- SLIDE 6: GIFT -->
+  <div class="slide" id="s5">
+    <p class="gift-title-ar">لائحة الهدايا</p>
+    <p class="gift-title-en">Gift Registry</p>
+    <p class="gift-body-ar">حضوركم هو أكبر هدية لنا.<br>لمن يرغب، لائحة الهدايا في</p>
+    <p class="gift-body-en">Your presence is the greatest gift.<br>For those who wish to give:</p>
+    <div id="whish-block" style="display:none">
+      <div class="whish-logo">💳</div>
+      <p class="whish-info" id="whish-info-text"></p>
+    </div>
+    <div id="gift-bank-block" style="display:none">
+      <p class="gift-body-ar" id="gift-bank-ar"></p>
+      <p class="gift-body-en" id="gift-bank-en"></p>
+    </div>
+    <p id="gift-no-info" class="gift-body-ar" style="font-size:1.3rem;margin-top:0.5rem">حضوركم هو الهدية الأجمل 🌿</p>
+  </div>
+
+  <!-- SLIDE 7: RSVP -->
+  <div class="slide" id="s6">
+    <div id="rsvp-wrap" style="width:100%;display:flex;flex-direction:column;align-items:center"></div>
+  </div>
+
+  <!-- SLIDE 8: CLOSING -->
+  <div class="slide" id="s7">
+    <div class="photo-card">
+      <div class="photo-card-img" id="closing-photo"></div>
+      <div class="photo-card-caption">
+        <span id="closing-cap-ar">فَالَّذِي جَمَعَهُ اللهُ لاَ يُفَرِّقُهُ إِنْسَانٌ</span>
+        <span class="photo-card-caption-en" id="closing-cap-en">What God has joined together, let no one separate.</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- #slider -->
+
+<div id="swipe-hint"><p>Swipe left &nbsp;← &nbsp;·&nbsp; حرك إلى اليسار</p></div>
+<div id="dots"></div>
+<button id="music-btn" onclick="toggleMusic()" aria-label="music">♪</button>
+
+<script>
+/* ═══════════════════════════════
+   CONFIG
+═══════════════════════════════ */
+let REPO = 'your-username/your-repo';
+let SETTINGS_URL = '';
+let BASE_URL = '';
+const N_SLIDES = 8;
+
+let CFG = {}, GID = '', GEN = '', GEN_AR = '', FAM = [];
+let cur = 0, musicOn = false;
+let bgPhotos = [], bgIdx = 0, bgTimer = null;
+let invitationOpened = false;
+let _ghLoaded = false;
+
+const DEFAULTS = {
+  groomName:'Karim', groomNameAr:'كريم', groomFamily:'Khoury',
+  brideName:'Lara',  brideNameAr:'لارا',  brideFamily:'Sassine',
+  weddingDate:'2026-09-26', ceremonyTime:'16:00', receptionTime:'19:00',
+  churchName:'Saint Antoine Church', churchNameAr:'كنيسة مار أنطونيوس',
+  churchAddress:'Kahhale', churchMap:'',
+  venueName:'La Salle', venueNameAr:'قاعة لا سال',
+  venueAddress:'', venueMap:'',
+  bibleQuoteAr:'إِذًا لَيْسَا بَعْدُ اثْنَيْنِ\nبَلْ جَسَدٌ وَاحِدٌ .',
+  bibleQuote:'"The two are no longer two, but one flesh."',
+  closingCapAr:'فَالَّذِي جَمَعَهُ اللهُ لاَ يُفَرِّقُهُ إِنْسَانٌ',
+  closingCapEn:'What God has joined together, let no one separate.',
+  invLang:'both', bgMusic:'',
+  whishAccount:'', giftBankName:'', giftBankAccount:'', giftBankIban:'',
+  rsvpPhone:'', rsvpWebhook:'', formspreeId:'',
+  photoInterval:4
+};
+
+/* ═══════════════════════════════
+   SLIDER
+═══════════════════════════════ */
+const slider = document.getElementById('slider');
+slider.style.width = (N_SLIDES * 100) + 'vw';
+let tx0=0, ty0=0, swiping=false, rafId=null, currentOffset=0;
+
+function setSliderPos(vw, px, animated) {
+  slider.style.transition = animated ? 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94)' : 'none';
+  slider.style.transform = px ? `translateX(calc(${vw}vw + ${px}px))` : `translateX(${vw}vw)`;
+}
+function goTo(n) {
+  if (n < 0) n = 0; if (n >= N_SLIDES) n = N_SLIDES - 1;
+  cur = n; setSliderPos(-cur*100, 0, true); updateDots();
+  if (cur > 0) document.getElementById('swipe-hint').classList.add('hidden');
+  if (cur === N_SLIDES-1) document.getElementById('swipe-hint').style.display = 'none';
+}
+slider.addEventListener('touchstart', e => {
+  if (!invitationOpened) return;
+  tx0=e.touches[0].clientX; ty0=e.touches[0].clientY; swiping=false; currentOffset=0;
+  setSliderPos(-cur*100, 0, false);
+}, {passive:true});
+slider.addEventListener('touchmove', e => {
+  const dx=e.touches[0].clientX-tx0, dy=e.touches[0].clientY-ty0;
+  if (Math.abs(dx)<Math.abs(dy)||Math.abs(dx)<6) return;
+  swiping=true; e.preventDefault();
+  let offset=dx;
+  if ((cur===0&&dx>0)||(cur===N_SLIDES-1&&dx<0)) offset=dx*0.15;
+  currentOffset=offset;
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId=requestAnimationFrame(()=>{ setSliderPos(-cur*100,currentOffset,false); rafId=null; });
+}, {passive:false});
+slider.addEventListener('touchend', e => {
+  if (rafId){cancelAnimationFrame(rafId);rafId=null;}
+  const dx=e.changedTouches[0].clientX-tx0;
+  if (!swiping){setSliderPos(-cur*100,0,true);return;}
+  swiping=false;
+  if (Math.abs(dx)<40) goTo(cur); else dx<0?goTo(cur+1):goTo(cur-1);
+}, {passive:true});
+slider.addEventListener('mousedown', e=>{if(!invitationOpened)return;tx0=e.clientX;swiping=true;setSliderPos(-cur*100,0,false);});
+window.addEventListener('mouseup', e=>{
+  if(!swiping)return; const dx=e.clientX-tx0; swiping=false;
+  if(Math.abs(dx)<40){goTo(cur);return;} dx<0?goTo(cur+1):goTo(cur-1);
+});
+document.getElementById('s0').addEventListener('click', beginInvitation);
+function beginInvitation(){if(invitationOpened)return;invitationOpened=true;startMusic();goTo(1);}
+
+/* ═══════════════════════════════
+   DOTS
+═══════════════════════════════ */
+function buildDots(){
+  const w=document.getElementById('dots');
+  for(let i=0;i<N_SLIDES;i++){const d=document.createElement('div');d.className='dot';w.appendChild(d);}
+  updateDots();
+}
+function updateDots(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));}
+
+/* ═══════════════════════════════
+   BG SLIDESHOW
+═══════════════════════════════ */
+function buildBgSlideshow(photos, intervalMs) {
+  if (!photos.length) return;
+  bgPhotos = photos;
+  const stage = document.getElementById('bg-stage');
+  stage.innerHTML = '';
+  clearInterval(bgTimer);
+  const layers = photos.map((src, i) => {
+    const layer = document.createElement('div'); layer.className = 'bg-layer';
+    layer.style.backgroundColor = '#1a2418'; layer.style.transform = 'translateZ(0)';
+    stage.appendChild(layer);
+    const img = new Image();
+    if (i === 0) img.fetchPriority = 'high';
+    img.onload = () => { layer.style.backgroundImage = `url('${src}')`; if(i===0&&!layer.classList.contains('active')) layer.classList.add('active'); };
+    img.onerror = () => { if(i===0) layer.classList.add('active'); };
+    img.src = src;
+    return layer;
+  });
+  layers[0].classList.add('active');
+  if (photos.length < 2) return;
+  bgIdx = 0;
+  bgTimer = setInterval(() => {
+    const all = stage.querySelectorAll('.bg-layer');
+    if (!all.length) return;
+    all[bgIdx].classList.remove('active');
+    bgIdx = (bgIdx+1) % all.length;
+    all[bgIdx].classList.add('active');
+  }, intervalMs);
+}
+
+/* ═══════════════════════════════
+   MUSIC
+═══════════════════════════════ */
+function startMusic(){const a=document.getElementById('bg-audio');a.play().catch(()=>{});musicOn=true;document.getElementById('music-btn').textContent='♫';}
+function toggleMusic(){const a=document.getElementById('bg-audio');if(musicOn){a.pause();document.getElementById('music-btn').textContent='♪';}else{a.play().catch(()=>{});document.getElementById('music-btn').textContent='♫';}musicOn=!musicOn;}
+document.addEventListener('visibilitychange',()=>{const a=document.getElementById('bg-audio');if(document.hidden&&musicOn)a.pause();else if(!document.hidden&&musicOn)a.play().catch(()=>{});});
+
+/* ═══════════════════════════════
+   SETTINGS
+═══════════════════════════════ */
+async function loadSettings() {
+  try {
+    const local = localStorage.getItem('wds2_settings');
+    if (local) {
+      CFG = {...DEFAULTS,...JSON.parse(local)};
+      initRepo(); applySettings();
+      if (GID) applyGuest(); else buildRsvp();
+    }
+  } catch(e){}
+  fetchFromGitHub();
+}
+async function fetchFromGitHub() {
+  if (!SETTINGS_URL) {
+    // Try one more time after a short wait — boot may not have set it yet
+    return;
+  }
+  try {
+    const r = await fetch(SETTINGS_URL+'?t='+Date.now());
+    if (!r.ok) return;
+    const fresh = await r.json();
+    const merged = {...DEFAULTS,...fresh};
+    CFG = merged;
+    _ghLoaded = true;
+    try{localStorage.setItem('wds2_settings', JSON.stringify(merged));}catch(e){}
+    initRepo(); applySettings();
+    if (GID) applyGuest(); else buildRsvp();
+  } catch(e){}
+}
+function initRepo(){
+  // Priority: CFG._repo from settings.json > auto-detected REPO > placeholder
+  const r = CFG._repo || REPO;
+  if (r && r !== 'your-username/your-repo' && r.includes('/')) {
+    const [owner,repo] = r.split('/');
+    // Only override if not already set by auto-detection
+    if (!SETTINGS_URL || SETTINGS_URL.includes('your-username')) {
+      SETTINGS_URL = `https://raw.githubusercontent.com/${r}/main/settings.json`;
+    }
+    if (!BASE_URL || BASE_URL.includes('your-username')) {
+      BASE_URL = `https://${owner}.github.io/${repo}/`;
+    }
+    // Always update CFG._baseUrl so res() uses it
+    CFG._baseUrl = CFG._baseUrl || BASE_URL;
+  }
+}
+
+function res(p){if(!p)return'';if(p.startsWith('http')||p.startsWith('blob:'))return p;const base=CFG._baseUrl||BASE_URL;return base?base+p:p;}
+
+function applySettings() {
+  const S = CFG;
+  // Page title
+  const gn = S.groomName||DEFAULTS.groomName, bn = S.brideName||DEFAULTS.brideName;
+  document.getElementById('page-title').textContent = `${gn} & ${bn} — Wedding`;
+
+  // Language
+  const lang = S.invLang||'both';
+  document.body.classList.remove('lang-ar','lang-en');
+  if (lang==='ar') document.body.classList.add('lang-ar');
+  else if (lang==='en') document.body.classList.add('lang-en');
+
+  // BG photos
+  const photos = [S.envPhoto,S.couplePhoto,S.couplePhoto2,S.couplePhoto3,
+    S.couplePhotoMid,S.couplePhotoMid2,S.couplePhotoMid3,
+    S.couplePhotoClose,S.couplePhotoClose2,S.rsvpPhoto,
+    ...(S.galleryPhotos||[])].filter(Boolean).map(res);
+  const unique = [...new Set(photos)];
+  buildBgSlideshow(unique, (S.photoInterval||4)*1000);
+
+  // Closing photo
+  const cpClose = res(S.couplePhotoClose||S.couplePhoto);
+  if (cpClose) document.getElementById('closing-photo').style.backgroundImage=`url('${cpClose}')`;
+
+  // Closing captions
+  setHtml('closing-cap-ar', S.closingCapAr||DEFAULTS.closingCapAr);
+  setHtml('closing-cap-en', S.closingCapEn||DEFAULTS.closingCapEn);
+
+  // Music
+  if (S.bgMusic){const a=document.getElementById('bg-audio');const url=res(S.bgMusic);if(a.src!==url){a.src=url;a.load();}}
+
+  // Dates
+  const wDate = S.weddingDate||'2026-09-26';
+  const d = new Date(wDate+'T12:00:00');
+  const M_AR=['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+  const M_EN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const D_AR=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const D_EN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const dayAr=D_AR[d.getDay()],dayEn=D_EN[d.getDay()];
+  const numAr=ar(d.getDate()),numEn=d.getDate();
+  const monAr=M_AR[d.getMonth()],monEn=M_EN[d.getMonth()];
+  const yrAr=ar(d.getFullYear()),yrEn=d.getFullYear();
+  const ctAr=arTime(S.ceremonyTime||'16:00'),ctEn=enTime(S.ceremonyTime||'16:00');
+  const rtAr=arTime(S.receptionTime||'19:00'),rtEn=enTime(S.receptionTime||'19:00');
+  setHtml('f-date-ar',`نهار ${dayAr} الواقع في<br>${numAr} ${monAr} ${yrAr}`);
+  setHtml('f-date-en',`${dayEn}, ${monEn} ${numEn}, ${yrEn}`);
+  setHtml('v-ctime-ar',`${dayAr}، ${numAr} ${monAr} ${yrAr}<br>${ctAr}`);
+  setHtml('v-ctime-en',`${dayEn}, ${monEn} ${numEn}, ${yrEn} · ${ctEn}`);
+  setHtml('v-rtime-ar',`${dayAr}، ${numAr} ${monAr} ${yrAr}<br>${rtAr}`);
+  setHtml('v-rtime-en',`${dayEn}, ${monEn} ${numEn}, ${yrEn} · ${rtEn}`);
+
+  // Names
+  const groomAr=fn(S.groomNameAr||DEFAULTS.groomNameAr);
+  const brideAr=fn(S.brideNameAr||DEFAULTS.brideNameAr);
+  const groomEn=fn(S.groomName||DEFAULTS.groomName);
+  const brideEn=fn(S.brideName||DEFAULTS.brideName);
+  const gf=S.groomFamily||DEFAULTS.groomFamily;
+  const bf=S.brideFamily||DEFAULTS.brideFamily;
+  setHtml('f-couple-ar',`${groomAr} و ${brideAr}`);
+  setHtml('f-couple-en',`${groomEn} &amp; ${brideEn}`);
+  setHtml('f-fam-ar',`يسر عائلة ${groomAr} وعائلة ${brideAr}`);
+  setHtml('f-fam-en',`${gf} Family &amp; ${bf} Family`);
+
+  // Quote
+  if (S.bibleQuoteAr) setHtml('q-ar', S.bibleQuoteAr.replace(/\n/g,'<br>'));
+  if (S.bibleQuote) setHtml('q-en', S.bibleQuote);
+
+  // Church
+  const cn=S.churchNameAr||S.churchName||'كنيسة', cnEn=S.churchName||'', ca=S.churchAddress||'';
+  setHtml('v-church-ar', cn+(ca?`<br>${ca}`:''));
+  setHtml('v-church-en', cnEn+(ca?` · ${ca}`:''));
+  if (S.churchMap) document.getElementById('church-map-btn').href=S.churchMap;
+
+  // Venue
+  const vn=S.venueNameAr||S.venueName||'القاعة', vnEn=S.venueName||'', va=S.venueAddress||'';
+  setHtml('v-venue-ar', vn+(va?`<br>${va}`:''));
+  setHtml('v-venue-en', vnEn+(va?` · ${va}`:''));
+  if (S.venueMap) document.getElementById('venue-map-btn').href=S.venueMap;
+
+  // Gift
+  const hasWhish=!!(S.whishAccount);
+  const hasBank=!!(S.giftBankName||S.giftBankAccount||S.giftBankIban);
+  document.getElementById('whish-block').style.display=hasWhish?'':'none';
+  document.getElementById('gift-bank-block').style.display=hasBank?'':'none';
+  document.getElementById('gift-no-info').style.display=(!hasWhish&&!hasBank)?'':'none';
+  if (hasWhish) setHtml('whish-info-text','Acct: '+S.whishAccount);
+  if (hasBank){
+    let txt=''; if(S.giftBankName)txt+=S.giftBankName+'\n';
+    if(S.giftBankAccount)txt+='Acct: '+S.giftBankAccount+'\n';
+    if(S.giftBankIban)txt+='IBAN: '+S.giftBankIban;
+    setHtml('gift-bank-ar',txt.replace(/\n/g,'<br>'));
+    setHtml('gift-bank-en',txt.replace(/\n/g,'<br>'));
+  }
+}
+
+/* ═══════════════════════════════
+   GUEST & RSVP
+═══════════════════════════════ */
+function applyGuest(){
+  const guests=CFG.guests||{}, g=guests[GID];
+  GEN=g?(g.en||GID.replace(/-/g,' ')):GID.replace(/-/g,' ');
+  GEN_AR=g?(g.ar||''):'';
+  FAM=g?(g.members||[]):[];
+  // Don't rebuild RSVP if user already interacted (Yes was tapped)
+  const ns=document.getElementById('rsvp-names-section');
+  const alreadyInteracted=ns&&ns.style.display==='flex';
+  if(alreadyInteracted){
+    // Just refresh checkboxes in place without rebuilding
+    const sub=ns.querySelector('.rsvp-submit');
+    if(sub&&FAM.length&&!ns.querySelector('.rsvp-check-row'))
+      renderNamesCheckboxes(ns,sub,FAM);
+  } else {
+    buildRsvp();
+  }
+}
+
+function buildRsvp(){
+  const wrap=document.getElementById('rsvp-wrap');
+  wrap.innerHTML='';
+  const saved=GID?JSON.parse(localStorage.getItem('rsvp2_'+GID)||'null'):null;
+  if(saved){renderConfirm(wrap,saved);return;}
+  if(!GID){
+    const p=document.createElement('p');p.className='rsvp-question-ar';p.textContent='يرجى استخدام الرابط الخاص بك للتأكيد';
+    const pe=document.createElement('p');pe.className='rsvp-question-en';pe.textContent='Please use your personal link to RSVP.';
+    wrap.appendChild(p);wrap.appendChild(pe);return;
+  }
+  const qa=document.createElement('p');qa.className='rsvp-question-ar';qa.textContent='هل ستحضر في يوم الفرح؟';
+  const qe=document.createElement('p');qe.className='rsvp-question-en';qe.textContent='Will you attend our special day?';
+  wrap.appendChild(qa);wrap.appendChild(qe);
+  const pair=document.createElement('div');pair.className='rsvp-pair';
+  const yBtn=document.createElement('button');yBtn.className='rsvp-big';
+  yBtn.innerHTML='نعم، بكل سرور<br><small style="font-size:0.75em;opacity:0.85">Yes, with pleasure</small>';
+  const nBtn=document.createElement('button');nBtn.className='rsvp-big';
+  nBtn.innerHTML='للأسف لن أتمكن<br><small style="font-size:0.75em;opacity:0.75">Regretfully decline</small>';
+  const namesSection=document.createElement('div');
+  namesSection.id='rsvp-names-section';
+  namesSection.style.cssText='width:100%;display:none;flex-direction:column;align-items:center;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.2);';
+  const sub=document.createElement('button');sub.className='rsvp-submit';sub.style.marginTop='1rem';
+  sub.innerHTML='إرسال &nbsp;·&nbsp; Submit';
+  sub.addEventListener('click',()=>{
+    let attending=[];
+    const currentFAM=(CFG.guests&&CFG.guests[GID]&&CFG.guests[GID].members)||FAM;
+    if(currentFAM.length>0){
+      attending=[...namesSection.querySelectorAll('.rsvp-cb:checked')].map(c=>c.value);
+      if(attending.length===0){sub.textContent='⚠ يرجى اختيار اسم';sub.style.background='#e53935';setTimeout(()=>{sub.innerHTML='إرسال &nbsp;·&nbsp; Submit';sub.style.background='';},2500);return;}
+    } else attending=[GEN];
+    const data=mkData('yes',attending);saveRsvp(data);wrap.innerHTML='';renderConfirm(wrap,data);
+  });
+  namesSection.appendChild(sub);
+  // Pre-populate namesSection immediately at build time so it's ready on tap
+  _prefillNamesSection(namesSection, sub);
+
+  yBtn.onclick=()=>{
+    yBtn.classList.add('selected-yes');nBtn.classList.remove('selected-yes','selected-no');nBtn.classList.add('selected-no');
+    // If names weren't ready at build time (race), try again now
+    if (!namesSection.querySelector('.rsvp-check-row') && !namesSection.querySelector('.rsvp-question-ar')) {
+      _prefillNamesSection(namesSection, sub);
+    }
+    namesSection.style.display='flex';
+  };
+  nBtn.onclick=()=>{const d=mkData('no',[]);saveRsvp(d);wrap.innerHTML='';renderConfirm(wrap,d);};
+  pair.appendChild(yBtn);pair.appendChild(nBtn);
+  wrap.appendChild(pair);wrap.appendChild(namesSection);
+}
+
+function _prefillNamesSection(container, sub) {
+  // Called at buildRsvp() time — populates if members already known
+  let members=[];
+  if(CFG.guests&&CFG.guests[GID]&&Array.isArray(CFG.guests[GID].members)&&CFG.guests[GID].members.length)
+    members=CFG.guests[GID].members;
+  else if(FAM&&FAM.length) members=FAM;
+  if(members.length) renderNamesCheckboxes(container,sub,members);
+  // If still empty, set up a watcher that fills in when GitHub data arrives
+  else {
+    const watcher=setInterval(()=>{
+      let m=[];
+      if(CFG.guests&&CFG.guests[GID]&&Array.isArray(CFG.guests[GID].members)&&CFG.guests[GID].members.length)
+        m=CFG.guests[GID].members;
+      else if(FAM&&FAM.length) m=FAM;
+      if(m.length){clearInterval(watcher);renderNamesCheckboxes(container,sub,m);}
+    },400);
+    // Stop after 15s
+    setTimeout(()=>clearInterval(watcher),15000);
+  }
+}
+
+function showNamesSection(container, sub) {
+  // Legacy — now just delegates to _prefillNamesSection
+  _prefillNamesSection(container, sub);
+}
+
+function renderNamesCheckboxes(container,sub,members){
+  // remove any existing name rows
+  container.querySelectorAll('.rsvp-check-row,.rsvp-total,.rsvp-question-ar,.rsvp-question-en').forEach(e=>e.remove());
+  if(members.length>0){
+    const nqa=document.createElement('p');nqa.className='rsvp-question-ar';nqa.style.fontSize='clamp(1rem,4vw,1.3rem)';nqa.textContent='من سيحضر معكم؟';
+    const nqe=document.createElement('p');nqe.className='rsvp-question-en';nqe.style.marginBottom='0.75rem';nqe.textContent='Who will be attending?';
+    container.insertBefore(nqe,sub);container.insertBefore(nqa,nqe);
+    members.forEach(name=>{
+      const lbl=document.createElement('label');lbl.className='rsvp-check-row';
+      const cb=document.createElement('input');cb.type='checkbox';cb.checked=false;cb.value=name;cb.className='rsvp-cb';
+      cb.addEventListener('change',refreshTotal);
+      const nm=document.createElement('span');nm.className='rsvp-member-name';nm.textContent=name;
+      lbl.appendChild(cb);lbl.appendChild(nm);container.insertBefore(lbl,sub);
+    });
+    const tot=document.createElement('div');tot.className='rsvp-total';
+    tot.innerHTML=`إجمالي الضيوف الحاضرين: <strong id="rc">0</strong>`;
+    const totEn=document.createElement('span');totEn.className='rsvp-total-en';totEn.id='rc-en';totEn.textContent='Total attending: 0';
+    tot.appendChild(totEn);container.insertBefore(tot,sub);
+    FAM=members;
+  }
+}
+
+function refreshTotal(){const c=document.querySelectorAll('.rsvp-cb:checked').length;const el=document.getElementById('rc');const elEn=document.getElementById('rc-en');if(el)el.textContent=c;if(elEn)elEn.textContent='Total attending: '+c;}
+
+function renderConfirm(wrap,data){
+  if(data.response==='yes'&&data.attending&&data.attending.length>0){
+    data.attending.forEach(name=>{const row=document.createElement('div');row.className='rsvp-row';row.innerHTML=`<span class="rsvp-member-name">${name}</span><button class="rsvp-toggle yes" style="cursor:default">Yes</button>`;wrap.appendChild(row);});
+    const tot=document.createElement('div');tot.className='rsvp-total';tot.innerHTML=`إجمالي الضيوف الحاضرين: <strong>${data.attending.length}</strong><span class="rsvp-total-en">Total attending: ${data.attending.length}</span>`;wrap.appendChild(tot);
+  } else {
+    const ca=document.createElement('p');ca.className='rsvp-confirm-ar';ca.textContent=data.response==='yes'?'شكراً! نتطلع بشغف لرؤيتكم 🌿':'للأسف ستُفتقدون. شكراً لإعلامنا.';
+    const ce=document.createElement('p');ce.className='rsvp-confirm-en';ce.textContent=data.response==='yes'?'Thank you! We look forward to celebrating with you.':'We will miss you dearly. Thank you for letting us know.';
+    wrap.appendChild(ca);wrap.appendChild(ce);
+  }
+  addNote(wrap);
+}
+function addNote(wrap){const phone=CFG.rsvpPhone||'';if(!phone)return;const a=document.createElement('p');a.className='rsvp-note-ar';a.textContent=`للتعديل على ردك، يرجى الاتصال: ${phone}`;const b=document.createElement('p');b.className='rsvp-note-en';b.textContent=`To update your response, please contact: ${phone}`;wrap.appendChild(a);wrap.appendChild(b);}
+function mkData(response,attending){return{guestId:GID,guestName:GEN,guestNameAr:GEN_AR,response,attending,date:new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})};}
+function saveRsvp(data){
+  if(GID)localStorage.setItem('rsvp2_'+GID,JSON.stringify(data));
+  // BroadcastChannel for admin
+  try{const bc=new BroadcastChannel('wds2_rsvp');bc.postMessage({type:'rsvp_updated',id:GID,guestEn:GEN,guestAr:GEN_AR,status:data.response,guests:(data.attending||[]).length,attending:data.attending||[],date:data.date});bc.close();}catch(e){}
+  if(CFG.rsvpWebhook){const payload={id:data.guestId,guestEn:data.guestName||'',guestAr:data.guestNameAr||'',status:data.response,guests:(data.attending||[]).length,attending:(data.attending||[]).join(', '),date:data.date||''};fetch(CFG.rsvpWebhook,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)}).catch(()=>{});}
+  if(CFG.formspreeId){const fd=new FormData();fd.append('guest',data.guestName);fd.append('guestAr',data.guestNameAr||'');fd.append('response',data.response);fd.append('attending',(data.attending||[]).join(', '));fd.append('guests',(data.attending||[]).length);fd.append('date',data.date);fetch(`https://formspree.io/f/${CFG.formspreeId}`,{method:'POST',body:fd,headers:{Accept:'application/json'}}).catch(()=>{});}
+}
+
+/* ═══════════════════════════════
+   UTILS
+═══════════════════════════════ */
+const AR_D=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+function ar(n){return String(n).split('').map(c=>AR_D[+c]??c).join('');}
+function arTime(t){if(!t)return'';const[h,m]=t.split(':').map(Number);const suffix=h<12?'صباحاً':'مساءً';const h12=h%12||12;return`${ar(h12)}:${ar(String(m).padStart(2,'0'))} ${suffix}`;}
+function enTime(t){if(!t)return'';const[h,m]=t.split(':').map(Number);const ampm=h<12?'AM':'PM';return`${h%12||12}:${String(m).padStart(2,'0')} ${ampm}`;}
+function fn(name){return(name||'').split(' ')[0];}
+function setHtml(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+
+/* ═══════════════════════════════
+   BOOT
+═══════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(location.search);
+  GID=p.get('id')||'';
+  // Auto-detect repo from current page URL (works on GitHub Pages)
+  // e.g. https://owner.github.io/repo-name/invite2.html
+  const loc = window.location;
+  if (loc.hostname.endsWith('.github.io')) {
+    const parts = loc.pathname.split('/').filter(Boolean); // ['repo-name','invite2.html']
+    if (parts.length >= 1) {
+      const owner = loc.hostname.replace('.github.io','');
+      const repoName = parts[0];
+      REPO = owner + '/' + repoName;
+      BASE_URL = loc.origin + '/' + repoName + '/';
+      SETTINGS_URL = 'https://raw.githubusercontent.com/' + REPO + '/main/settings.json';
+    }
+  }
+  // Allow URL override: ?repo=owner/repo
+  const repoParam = p.get('repo');
+  if (repoParam && repoParam.includes('/')) {
+    const [o,r] = repoParam.split('/');
+    REPO = repoParam;
+    BASE_URL = 'https://' + o + '.github.io/' + r + '/';
+    SETTINGS_URL = 'https://raw.githubusercontent.com/' + REPO + '/main/settings.json';
+  }
+  buildDots();
+  slider.style.width=(N_SLIDES*100)+'vw';
+  slider.style.transition='none';
+  slider.style.transform='translateX(0)';
+  loadSettings();
+});
+</script>
+</body>
+</html>
