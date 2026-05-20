@@ -38,6 +38,14 @@
   "couplePhotoMid2": "Karim & Lara/img5.jpg",
   "couplePhotoClose": "Karim & Lara/img4.jpg",
   "guests": {
+    "Toufic-Bejjanis-Family": {
+      "en": "Toufic Bejjani's Family",
+      "ar": "عائلة توقيق بجاني",
+      "members": [
+        "Toufic",
+        "Reine"
+      ]
+    },
     "Rony-Abboudys-Family": {
       "en": "Rony Abboudy's Family",
       "ar": "عائلة روني عبودي الكريمة",
