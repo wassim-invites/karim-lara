@@ -37,16 +37,7 @@
   "couplePhotoMid": "Karim & Lara/img4.jpg",
   "couplePhotoMid2": "Karim & Lara/img5.jpg",
   "couplePhotoClose": "Karim & Lara/img4.jpg",
-  "guests": {
-    "Rony-Abboudys-Family": {
-      "en": "Rony Abboudy's Family",
-      "ar": "عائلة روني عبودي الكريمة",
-      "members": [
-        "Rony",
-        "Cindi"
-      ]
-    }
-  },
+  "guests": {},
   "_baseUrl": "https://wassim-invites.github.io/karim-lara/",
   "_repo": "wassim-invites/karim-lara"
 }
