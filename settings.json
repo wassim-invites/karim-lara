@@ -37,6 +37,14 @@
   "couplePhotoMid": "Karim & Lara/WM4.jpg",
   "couplePhotoClose": "Karim & Lara/WM2.jpg",
   "guests": {
+    "Fadi-Baba-Family": {
+      "en": "Fadi Baba Family",
+      "ar": "عائلة فادي البابا",
+      "members": [
+        "Fadi",
+        "Mona"
+      ]
+    },
     "Toufic-Bejjanis-Family": {
       "en": "Toufic Bejjani's Family",
       "ar": "عائلة توقيق بجاني",
